@@ -1,0 +1,44 @@
+.tf-logo {
+    margin-top: -82px;
+}
+
+.hover-zoom {
+    display: block;
+}
+
+.hover-zoom:before {
+    content: "See preview";
+    position: absolute;
+    left: 54%;
+    top: 50%;
+    margin-left: -65px;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity .3s ease;
+    color: white;
+    z-index: 1;
+    margin-top: -17px;
+    font-family: 'Montserrat';
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.hover-zoom:hover:before {
+    opacity: 1;
+}
+
+.hover-zoom:after {
+    content: "";
+    background: #6d5cae;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.hover-zoom:hover:after {
+    opacity: 0.8;
+}
