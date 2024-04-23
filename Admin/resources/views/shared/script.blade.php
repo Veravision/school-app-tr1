@@ -1,4 +1,3 @@
-   <!-- BEGIN VENDOR JS -->
    <script src="{{asset('assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
     <!--  A polyfill for browsers that don't support ligatures: remove liga.js if not needed-->
     <script src="{{asset('assets/plugins/liga.js')}}" type="text/javascript"></script>
@@ -33,7 +32,7 @@
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
-    <script src="{{asset('assets/js/pages.js')}}"></script>
+    <script src="{{asset('pages/js/pages.js')}}"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>

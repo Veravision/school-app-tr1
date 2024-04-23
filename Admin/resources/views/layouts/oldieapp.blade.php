@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <!-- Fonts -->
-        <!-- <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> -->
-
-        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-        <link rel="apple-touch-icon" href="pages/ico/60.png">
-        <link rel="apple-touch-icon" sizes="76x76"      href="{{asset('pages/ico/76.png')}}">
-        <link rel="apple-touch-icon" sizes="120x120"    href="{{asset('pages/ico/120.png')}}">
-        <link rel="apple-touch-icon" sizes="152x152"    href="{{asset('pages/ico/152.png')}}">
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-touch-fullscreen" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <meta content="Meet pages - The simplest and fastest way to build web UI for your dashboard or app." name="description" />
-        <meta content="Ace" name="author" />
-
-        @include('shared/style')
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body  class="fixed-header dashboard">
-                <!-- BEGIN SIDEBPANEL-->
-                <nav class="page-sidebar" data-pages="sidebar">
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>Pages - Admin Dashboard UI Kit - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="Meet pages - The simplest and fastest way to build web UI for your dashboard or app." name="description" />
+    <meta content="Ace" name="author" />
+    @include('shared/style')
+  </head>
+  <body class="fixed-header dashboard">
+    <!-- BEGIN SIDEBPANEL-->
+    <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
         <div class="row">
@@ -345,11 +333,9 @@
     </nav>
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
-
-
-            <!-- Page Content -->
-            <main class="page-container ">
-                    <!-- START HEADER -->
+    <!-- START PAGE-CONTAINER -->
+    <div class="page-container ">
+      <!-- START HEADER -->
       <div class="header ">
         <!-- START MOBILE SIDEBAR TOGGLE -->
         <a href="#" class="btn-link toggle-sidebar d-lg-none pg-icon btn-icon-link" data-toggle="sidebar">
@@ -524,9 +510,32 @@
         </div>
       </div>
       <!-- END HEADER -->
-                {{ $slot }}
-            </main>
-                <!--START QUICKVIEW -->
+      <!-- START PAGE CONTENT WRAPPER -->
+      <div class="page-content-wrapper ">
+        <!-- START PAGE CONTENT -->
+            {{$slot}}
+        <!-- END PAGE CONTENT -->
+        <!-- START COPYRIGHT -->
+        <!-- START CONTAINER FLUID -->
+        <!-- START CONTAINER FLUID -->
+        <div class=" container-fluid  container-fixed-lg footer">
+          <div class="copyright sm-text-center">
+            <p class="small-text no-margin pull-left sm-pull-reset">
+              ©2014-2020 All Rights Reserved. Pages® and/or its subsidiaries or affiliates are registered trademark of Revox Ltd.
+              <span class="hint-text m-l-15">Pages v05.23 20201105.r.190</span>
+            </p>
+            <p class="small no-margin pull-right sm-pull-reset">
+              Hand-crafted <span class="hint-text">&amp; made with Love</span>
+            </p>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- END COPYRIGHT -->
+      </div>
+      <!-- END PAGE CONTENT WRAPPER -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!--START QUICKVIEW -->
     <div id="quickview" class="quickview-wrapper" data-pages="quickview">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -1699,9 +1708,9 @@
       <!-- END Overlay Content !-->
     </div>
     <!-- END OVERLAY -->
-
+    <!-- BEGIN VENDOR JS -->
         @stack('modals')
         @include('shared/script')
         @livewireScripts
-    </body>
+  </body>
 </html>
