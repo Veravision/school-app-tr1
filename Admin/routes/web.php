@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\MenuCategoryController;
+use App\Http\Controllers\SubMenuCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,4 +27,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::controller(MenuItemController::class)->group(function(){
+        Route::get('menu', 'index')->name('menu.items');
+    });
 });

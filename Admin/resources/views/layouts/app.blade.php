@@ -39,11 +39,8 @@
             name="description"
         />
         <meta content="Ace" name="author" />
-
+        @yield('styles')
         @include('shared/style')
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -198,12 +195,28 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="builder.html">
-                            <span class="title">Builder</span>
+                        <a href="#">
+                            <span class="title">Menu Setup</span>
+                            <span class="arrow"></span
+                              >
                         </a>
                         <span class="icon-thumbnail"
-                            ><i class="pg-icon">brush</i></span
+                            ><i class="pg-icon">menu_level</i></span
                         >
+                        <ul class="sub-menu">
+                          <li class="">
+                              <a href="{{ route('menu.items') }}">Menu Items</a>
+                              <span class="icon-thumbnail"
+                                  ><i class="pg-icon">mi</i></span
+                              >
+                          </li>
+                          <li class="">
+                              <a href="secondary_layout.html">Menu Category</a>
+                              <span class="icon-thumbnail"
+                                  ><i class="pg-icon">mc</i></span
+                              >
+                          </li>
+                      </ul>
                     </li>
                     <li>
                         <a href="javascript:;"
@@ -1942,7 +1955,8 @@
     </div>
     <!-- END OVERLAY -->
         @stack('modals')
-        @include('shared/script') 
+        @include('shared/script')
+        @yield('scripts') 
         @livewireScripts
     </body>
 </html>

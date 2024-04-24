@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
 
+    @section('styles')
+            <!-- Scripts -->
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endsection
+
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
