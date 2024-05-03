@@ -13,7 +13,8 @@ class MenuItemController extends Controller
     public function index()
     {
         //
-        return view('pages.menu-items');
+        $fetchMenu = MenuItem::orderBy('menu_position')->get();
+        return view('pages.menu-items')->with(['allMenu' => $fetchMenu]);
     }
 
     /**
@@ -30,6 +31,26 @@ class MenuItemController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            "menu_title"    => ['required', 'max:255', 'unique:menu_items,menu_title'],
+            "menu_route"    => ['required', 'max:255'],
+            "menu_slog"     => ['required', 'max:255'],
+            "menu_position" => ['nullable'],
+            "menu_status"   => ['required'],
+        ]);
+
+        $menu = new MenuItem;
+
+        $menu->menu_title       = $request->menu_title;
+        $menu->menu_route       = $request->menu_route;
+        $menu->menu_slug        = $request->menu_slog;
+        $menu->menu_position    = $request->menu_position;
+        $menu->menu_status      = $request->menu_status;
+
+        $menu->save();
+        // dd($request);
+       // var_dump($menu);
+        return back()->withInput()->with(['success' => 'Great! Menu item added.']);
     }
 
     /**

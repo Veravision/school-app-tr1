@@ -132,6 +132,48 @@
                         >
                     </li>
                     <li class="">
+                      <a href="#">
+                          <span class="title">Menu Setup</span>
+                          <span class="arrow"></span
+                            >
+                      </a>
+                      <span class="icon-thumbnail"
+                          ><i class="pg-icon">menu_level</i></span
+                      >
+                      <ul class="sub-menu">
+                        <li class="">
+                            <a href="{{ route('menu.items') }}">Menu Items</a>
+                            <span class="icon-thumbnail"
+                                ><i class="pg-icon">mi</i></span
+                            >
+                        </li>
+                        <li class="">
+                            <a href="secondary_layout.html">Menu Category</a>
+                            <span class="icon-thumbnail"
+                                ><i class="pg-icon">mc</i></span
+                            >
+                        </li>
+                    </ul>
+                  </li>
+                  <li class="">
+                        <a href="#">
+                            <span class="title">Company</span>
+                            <span class="arrow"></span
+                              >
+                        </a>
+                        <span class="icon-thumbnail"
+                            ><i class="pg-icon">menu_level</i></span
+                        >
+                        <ul class="sub-menu">
+                          <li class="">
+                              <a href="{{ route('company.register') }}">Registration</a>
+                              <span class="icon-thumbnail"
+                                  ><i class="pg-icon">r</i></span
+                              >
+                          </li>
+                      </ul>
+                    </li>
+                    <li class="">
                         <a href="email.html" class="detailed">
                             <span class="title">Email</span>
                             <span class="details">234 New Emails</span>
@@ -193,30 +235,6 @@
                                 >
                             </li>
                         </ul>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="title">Menu Setup</span>
-                            <span class="arrow"></span
-                              >
-                        </a>
-                        <span class="icon-thumbnail"
-                            ><i class="pg-icon">menu_level</i></span
-                        >
-                        <ul class="sub-menu">
-                          <li class="">
-                              <a href="{{ route('menu.items') }}">Menu Items</a>
-                              <span class="icon-thumbnail"
-                                  ><i class="pg-icon">mi</i></span
-                              >
-                          </li>
-                          <li class="">
-                              <a href="secondary_layout.html">Menu Category</a>
-                              <span class="icon-thumbnail"
-                                  ><i class="pg-icon">mc</i></span
-                              >
-                          </li>
-                      </ul>
                     </li>
                     <li>
                         <a href="javascript:;"

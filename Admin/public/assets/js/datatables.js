@@ -40,7 +40,7 @@
     // Initialize datatable with ability to add rows dynamically
     var initTableWithDynamicRows = function() {
         var table = $('#tableWithDynamicRows');
-
+       
 
         var settings = {
             "sDom": "<t><'row'<p i>>",
@@ -65,9 +65,11 @@
                 $("#appName").val(),
                 $("#appDescription").val(),
                 $("#appPrice").val(),
-                $("#appNotes").val()
+                $("#appNotes").val(),
+                $("#switchSample").val() ,
+                
             ]);
-            $('#addNewAppModal').modal('hide');
+            $('#addNewAppModal').modal('show');
 
         });
     }

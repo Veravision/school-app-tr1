@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\SubMenuCategoryController;
+use App\Http\Controllers\CompanyRegistrationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +31,10 @@ Route::middleware([
 
     Route::controller(MenuItemController::class)->group(function(){
         Route::get('menu', 'index')->name('menu.items');
+        Route::post('menu-store', 'store')->name('menu.item.store');
+    });
+    Route::controller(CompanyRegistrationController::class)->group(function(){
+        Route::get('company-registration', 'create')->name('company.register');
+        Route::post('company-store', 'store')->name('company.store');
     });
 });
