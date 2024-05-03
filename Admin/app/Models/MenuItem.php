@@ -9,10 +9,10 @@ class MenuItem extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'menu_title'       ,
-        'menu_status'      ,
-        'menu_position'    ,
-        'menu_route'       ,
-        'menu_slug'        ,
+        'menu_title',
+        'menu_status',
+        'menu_position',
+        'menu_route',
+        'menu_slug',
     ];
 }

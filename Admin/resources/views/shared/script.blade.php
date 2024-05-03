@@ -40,5 +40,6 @@
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="{{asset('assets/js/dashboard.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/notifications.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
