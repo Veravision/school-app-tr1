@@ -26,10 +26,10 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body p-4">
-                                <h3 class="mb-4">Upload Company Logo</h3>
+                                <h7 class="mb-4 card-title"> Company Logo</h7>
                                     <fieldset class="row g-3">
                                         <div class="col-md-6">
-                                            <label for="input13" class="form-label">Select image:</lable>
+                                            <label class="form-label">Select image:</lable>
                                              <div class="filepond" style = "width: 18rem !important;"></div>
                                             {{-- <input type="file" name="filepond" id=""> --}}
                                         </div>
@@ -88,6 +88,44 @@
                        
                         <fieldset class="row g-3">
                             <legend><h5>Contact Information</h5></legend>
+                            <div class="row" id="animateLineContent-4">
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label for="phone">Phone Number<span class="text-danger">*</span></label>
+                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
+                                        <div class="input-group mb-3">
+                                            <select name="phone_number_code" value="{{old('phone_number_code')}}" style="appearance: none;" class="input-group-text phone-code" id="basic-addon1">
+            
+                                            </select>
+                                            <input type="text" class="form-control ph-number" name="phone_number" id="company-ph-number" placeholder="" value="{{old('phone_number')}}" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label for="phone">Office Number<span class="text-danger">*</span></label>
+                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
+                                        <div class="input-group mb-3">
+                                            <select name="office_number_code" value="{{old('office_number_code')}}" style="appearance: none;" class="input-group-text phone-code" id="basic-addon1">
+            
+                                            </select>
+                                            <input type="text" class="form-control ph-number" name="office_number" value="{{old('office_number')}}" id="company-ph-number" placeholder="" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone">Whatsapp Number</label>
+                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
+                                        <div class="input-group mb-3">
+                                            <select name="whatsapp_number_code" value="{{old('whatsapp_number_code')}}" style="appearance: none;" class="input-group-text phone-code" id="basic-addon1">
+            
+                                            </select>
+                                            <input type="text" class="form-control ph-number" name="whatsapp_number" value="{{old('whatsapp_number')}}" id="company-ph-number" placeholder="" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group form-group-default required">
@@ -102,8 +140,6 @@
                                         <label>Country</label>
                                         <select name="country" value="{{old('country')}}" id="country-list" class="form-control form-select country-list" required>
                                             <option selected disabled>Choose...</option>
-                                            <option value="country1">country1</option>
-                                            <option value="country2">country2</option>
                                         </select>
                                     </div>
                                 </div>
@@ -117,26 +153,6 @@
                                     <div class="form-group form-group-default">
                                         <label>zipcode</label>
                                         <input type="text" class="form-control" name="zip_code" value="{{old('zip_code')}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group form-group-default required">
-                                        <label>Phone Number</label>
-                                         <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4  form-group-default required">
-                                        <label>Office Number</label>
-                                        <input type="tel" class="form-control" name="office_number" value="{{old('office_number')}}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-group-default">
-                                        <label for="phone">WhatsApp Number</label>
-                                        <input type="tel" class="form-control" name="whatsapp_number" value="{{old('whatsapp_number')}}">
                                     </div>
                                 </div>
                             </div>
@@ -192,15 +208,21 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-6">
-                                    <div class="form-group form-group-default required">
-                                        <label>Phone Number</label>
-                                        <input type="tel" class="form-control" name="owner_phone_number" value="{{old('owner_phone_number')}}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="form-group form-group-default input-group required">
                                         <label>Mailing Address</label>
                                         <input type="email" class="form-control" name="owner_email" value="{{old('owner_email')}}" placeholder="desmond@address.com" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label for="phone">Phone Number<span class="text-danger">*</span></label>
+                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
+                                        <div class="input-group mb-3">
+                                            <select name="owner_phone_number_code" value="{{old('owner_phone_number_code')}}" style="appearance: none;" class="input-group-text phone-code" id="basic-addon1">
+            
+                                            </select>
+                                            <input type="text" class="form-control ph-number" name="owner_phone_number" id="company-ph-number" placeholder="" value="{{old('owner_phone_number')}}" aria-describedby="basic-addon1">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -241,6 +263,7 @@
         <script src="{{ asset('assets/js/form_layouts.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/js/industry.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/js/country.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/country-code.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
         <script src="{{asset('assets/plugins/filepond/filepond.min.js')}}"></script>
         <script src="{{asset('assets/plugins/filepond/filepond.jquery.js')}}"></script>

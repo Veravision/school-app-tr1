@@ -50,7 +50,7 @@ class MenuItemController extends Controller
         $menu->save();
         // dd($request);
        // var_dump($menu);
-        return back()->withInput()->with(['success' => 'Great! Menu item added.']);
+        return back()->withInput()->with(['success' => 'Great! Menu item added sucessfully.']);
     }
 
     /**

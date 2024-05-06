@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanyRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
 
 
 class CompanyRegistrationController extends Controller
@@ -55,7 +56,7 @@ class CompanyRegistrationController extends Controller
             'owner_phone_number'    => ['required'],
             'owner_email'           => ['required'],
             'status'                => ['nullable'],
-           'filepond'              => 'nullable|image|mimes:jpeg,jpg,png,gif',
+           'filepond'               => ['extensions:jpg,jpeg,png','mimes:jpg,jpeg,png', 'min:1024', 'max:12288']
         ],
         [
             'name.unique' => "Company name has already been registered",
@@ -63,46 +64,6 @@ class CompanyRegistrationController extends Controller
         ]
     );
 
-        try {
-            // dd($request);
-            if($request->hasFile('filepond')){
-               $company_photo_path = $this->upload_file('logo/', $request->file('filepond'));
-            // print("working");
-            }else{
-                $company_photo_path ="";
-                // print("ok");
-            }
-          // save record and return feedback msg
-            CompanyRegistration::create([
-                'name'                      =>$request->name,
-                'abbreviation'              =>$request->abbreviation,
-                'motto'                     =>$request->motto,
-                'cac_number'                =>$request->cac_number,
-                'industry'                  =>$request->industry,
-                'address'                   =>$request->address,
-                'country'                   =>$request->country,
-                'city'                      =>$request->city,
-                'zip_code'                  =>$request->zip_code,
-                'phone_number'              =>$request->phone_number,
-                'office_number'             =>$request->office_number,
-                'whatsapp_number'           =>$request->whatsapp_number,
-                'email'                     =>$request->email,
-                'instagram_handle'          =>$request->instagram_handle,
-                'facebook_page'             =>$request->facebook_page,
-                'owner_first_name'          =>$request->owner_first_name,
-                'owner_last_name'           =>$request->owner_last_name,
-                'owner_phone_number'        =>$request->owner_phone_number,
-                'owner_email'               =>$request->owner_email,
-                'status'                    =>$request->status,  
-                'photo_path'                =>$company_photo_path,
-               
-            ]);
-            return back()->withInput()->with(['success' => 'Company is registered successfully!']);
-          
-        } catch (\Throwable $th) {
-            //throw $th;
-            return back()->with('error', 'Oops! A problem occured. Can not upload image.');
-        }
 
     }
 

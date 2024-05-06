@@ -37,4 +37,8 @@ Route::middleware([
         Route::get('company-registration', 'create')->name('company.register');
         Route::post('company-store', 'store')->name('company.store');
     });
+    Route::controller(MenuCategoryController::class)->group(function(){
+        Route::get('menu-category', 'index')->name('menu.category');
+        Route::post('menu_category-store', 'store')->name('menu.category.store');
+    });
 });

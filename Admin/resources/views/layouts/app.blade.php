@@ -148,7 +148,7 @@
                             >
                         </li>
                         <li class="">
-                            <a href="secondary_layout.html">Menu Category</a>
+                            <a href="{{ route('menu.category') }}">Menu Category</a>
                             <span class="icon-thumbnail"
                                 ><i class="pg-icon">mc</i></span
                             >
