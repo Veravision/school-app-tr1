@@ -33,7 +33,7 @@
                                 @include('shared.feedback')
                                 <div class="row g-2">
                                     <div class="col-sm-12">
-                                        <div class="form-group form-group-default">
+                                        <div class="form-group form-group-default required">
                                             <label>Title</label>
                                             <input name="menu_title" value="{{ old('menu_title') }}" type="text"
                                                 class="form-control" placeholder="Name of the menu">
@@ -41,7 +41,7 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
+                                        <div class="form-group form-group-default required">
                                             <label>Route</label>
                                             <input name="menu_route" value="{{ old('menu_route') }}" type="text"
                                                 class="form-control" placeholder="Request route">
@@ -51,7 +51,7 @@
 
 
                                     <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
+                                        <div class="form-group form-group-default required">
                                             <label>Slug</label>
                                             <input name="menu_slug" value="{{ old('menu_slug') }}" type="text"
                                                 class="form-control" placeholder="url">

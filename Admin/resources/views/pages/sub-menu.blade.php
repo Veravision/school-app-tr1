@@ -53,22 +53,22 @@
                                         </div>
                                     </div>
                                     {{-- categories are shown based on the the menu selected since each category are created under a particular mnenu--}}
-                                    {{-- <div class="col-sm-12 hidden"> --}}
-                                        {{-- <div class="form-group form-group-default"> --}}
-                                            {{-- <label>Menu Category</label> --}}
-                                            {{-- <select class="form-control" id="input30" name="menu_category"> --}}
-                                                {{-- <option selected>Choose a category</option> --}}
+                                    <div class="col-sm-12">
+                                       <div class="form-group form-group-default">
+                                            <label>Menu Category</label>
+                                            <select class="form-control" id="input30" name="menu_category">
+                                                <option selected>Choose a category</option>
                                                 {{-- @foreach($allMenuCategory as $category) --}}
                                                 {{-- <option value="{{$category->id}}"> --}}
                                                     {{-- {{$category->menu_cat_title}} --}}
                                                 {{-- </option> --}}
                                                 {{-- @endforeach --}}
-                                            {{-- </select> --}}
-                                        {{-- </div> --}}
-                                    {{-- </div> --}}
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="col-sm-6">
-                                        <div class="form-group form-group-default requires">
+                                        <div class="form-group form-group-default required">
                                             <label>Route</label>
                                             <input type="text" name="sub_menu__route" step="1" id="" value="{{ old('sub_menu__route') }}"
                                                 class="form-control" placeholder="Route">
