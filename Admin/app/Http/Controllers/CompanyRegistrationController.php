@@ -64,13 +64,10 @@ class CompanyRegistrationController extends Controller
         ]
     );
 
-     // dd($request);
      if($request->hasFile('filepond')){
         $company_photo_path = $this->upload_file('logo/', $request->file('filepond'));
-     // print("working");
      }else{
          $company_photo_path ="";
-         // print("ok");
      }
    // save record and return feedback msg
      CompanyRegistration::updateOrCreate(
@@ -97,7 +94,6 @@ class CompanyRegistrationController extends Controller
          'owner_email'               =>$request->owner_email,
          'status'                    =>(isset($request->status))? $request->status:0,  
          'photo_path'                =>$company_photo_path,
-        
      ]);
      return back()->withInput()->with(['success' => 'Company is registered successfully!']);
         // try {

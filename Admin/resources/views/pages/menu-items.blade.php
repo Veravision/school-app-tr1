@@ -25,7 +25,8 @@
                         </div>
 
                         <div class="modal-body">
-                            <p class="small-text">Create a new <b>menu</b> using this form, make sure you fill them all</p>
+                            <p class="small-text">Create a new <b>menu</b> using this form, make sure you fill them all
+                            </p>
 
                             <form method="post" action="{{ route('menu.item.store') }}" role="form"
                                 enctype="multipart/form-data">
@@ -61,8 +62,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
                                             <label>Menu Position</label>
-                                            <input type="number" name="menu_position" step="1" id=""
-                                                class="form-control" placeholder="Position">
+                                            <input type="number" name="menu_position" min="0" step="1"
+                                                id="" class="form-control" placeholder="Position">
                                         </div>
                                     </div>
 
@@ -137,49 +138,60 @@
             <!-- END JUMBOTRON -->
             <!-- START CONTAINER FLUID -->
             <div class=" container-fluid   container-fixed-lg">
-                <!-- START card -->
-                <div class="card card-transparent">
-                    <div class="card-header ">
-                        <div class="card-title">Table with Dynamic Rows
-                        </div>
-                        <div class="pull-right">
-                            <div class="col-xs-12">
-                                <button aria-label="" id="show-modal" class="btn btn-primary btn-cons"><i
-                                        class="pg-icon">add</i> Add menu
-                                </button>
+                <div class="col-lg-9">
+                    <!-- START card -->
+                    <div class="card card-transparent">
+                        <div class="card-header ">
+                            <div class="card-title">Table with Dynamic Rows
                             </div>
+                            <div class="pull-right">
+                                <div class="col-xs-12">
+                                    <button aria-label="" id="show-modal" class="btn btn-primary btn-cons"><i
+                                            class="pg-icon">add</i> Add menu
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover demo-table-dynamic table-responsive-block"
-                            id="tableWithDynamicRows">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Route</th>
-                                    <th>Slug</th>
-                                    <th>Position</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($allMenu as $key => $menu)
+                        <div class="card-body">
+                            <table
+                                class="table table-hover demo-table-dynamic table-responsive-block  table-condensed table-detailed"
+                                id="detailedTable">
+                                <thead>
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $menu->menu_title }}</td>
-                                        <td>{{ $menu->menu_route }}</td>
-                                        <td>{{ $menu->menu_slug }}</td>
-                                        <td>{{ $menu->menu_position }}</td>
-                                        <td>{{ $menu->menu_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                        {{-- <th  style="width:1%" class="text-center">S/N</th> --}}
+                                        <th style="width:20%">Title</th>
+                                        {{-- <th style="width:15%">Route</th> --}}
+                                        {{-- <th style="width:15%">Slug</th> --}}
+                                        {{-- <th style="width:2%" class="text-center">Position</th> --}}
+                                        <th style="width:15%">Status</th>
+                                        <th style="width:20%">Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($allMenu as $key => $menu)
+                                        <tr>
+                                            <td>{{ $menu->menu_title }}</td>
+                                            {{-- <td>{{ $menu->menu_route }}</td> --}}
+                                            {{-- <td>{{ $menu->menu_slug }}</td> --}}
+                                            {{-- <td>{{ $menu->menu_position }}</td> --}}
+                                            <td>{{ $menu->menu_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{route('sub.menu')}}" class="btn btn-link text-primary">Setup Sub-menu</a>
+                                                    {!! $menu->menu_status == 1 ? '<a href="" class="btn btn-danger">De-activate</a>' : '<a href="" class="btn btn-success">Activate</a>' !!}
+                                                    <a href="" class="btn btn-warning">Edit</a>
+                                                    <a href="" class="btn btn-danger">Trash</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <!-- END card -->
                 </div>
-                <!-- END card -->
             </div>
             <!-- END CONTAINER FLUID -->
         </div>
@@ -200,8 +212,63 @@
         <!-- BEGIN PAGE LEVEL JS -->
         <script src="{{ asset('assets/js/datatables.js') }}" type="text/javascript"></script>
         <!-- END PAGE LEVEL JS -->
+        <script>
+            (function($) {
+                // Initialize a dataTable with collapsible rows to show more details
+                var initDetailedViewTable = function() {
 
+                    var _format = function(d) {
+                        // `d` is the original data object for the row
+                        console.log(d);
+                        return `<table class="table table-inline">
+                            <tr>
+                            <td>Menu Name:</td> 
+                            <td>${d[0]}</td>
+                            </tr>
+                            <tr> 
+                            <td>PSDs included</td>
+                            <td>USD 3000</td>
+                            </tr>
+                            <tr> 
+                            <td>Extra info</td> 
+                            <td>USD 2400</td>
+                            </tr>
+                            </table>`;
+                    }
+
+
+                    var table = $('#detailedTable');
+
+                    table.DataTable({
+                        "sDom": "t",
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "bSort": false
+                    });
+
+                    // Add event listener for opening and closing details
+                    $('#detailedTable tbody').on('click', 'tr', function() {
+                        //var row = $(this).parent()
+                        if ($(this).hasClass('shown') && $(this).next().hasClass('row-details')) {
+                            $(this).removeClass('shown');
+                            $(this).next().remove();
+                            return;
+                        }
+                        var tr = $(this).closest('tr');
+                        var row = table.DataTable().row(tr);
+
+                        $(this).parents('tbody').find('.shown').removeClass('shown');
+                        $(this).parents('tbody').find('.row-details').remove();
+
+                        row.child(_format(row.data())).show();
+                        tr.addClass('shown');
+                        tr.next().addClass('row-details');
+                    });
+                }
+
+                initDetailedViewTable();
+            })(window.jQuery);
+        </script>
         @include('shared.custom-notify')
-
     @endsection
 </x-app-layout>
