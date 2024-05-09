@@ -32,3 +32,10 @@
     <p>{{ Session::get('warning') }}</p>
 </div>
 @endif
+{{-- error message --}}
+@if(Session::has('error'))
+<div class="alert alert-danger" alert>
+    <h4 class="text-danger">Success!</h4>
+    <p>{{ Session::get('error') }}</p>
+</div>
+@endif

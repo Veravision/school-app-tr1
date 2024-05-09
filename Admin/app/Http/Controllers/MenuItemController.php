@@ -34,7 +34,7 @@ class MenuItemController extends Controller
         $request->validate([
             "menu_title"    => ['required', 'max:255', 'unique:menu_items,menu_title'],
             "menu_route"    => ['required', 'max:255'],
-            "menu_slog"     => ['required', 'max:255'],
+            "menu_slug"     => ['required', 'max:255'],
             "menu_position" => ['nullable'],
             "menu_status"   => ['required'],
         ]);
@@ -43,14 +43,14 @@ class MenuItemController extends Controller
 
         $menu->menu_title       = $request->menu_title;
         $menu->menu_route       = $request->menu_route;
-        $menu->menu_slug        = $request->menu_slog;
+        $menu->menu_slug        = $request->menu_slug;
         $menu->menu_position    = $request->menu_position;
         $menu->menu_status      = $request->menu_status;
 
         $menu->save();
         // dd($request);
        // var_dump($menu);
-        return back()->withInput()->with(['success' => 'Great! Menu item added.']);
+        return back()->withInput()->with(['success' => 'Great! Menu item added sucessfully.']);
     }
 
     /**

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('company_registrations', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->nullable();
             $table->string('abbreviation')->nullable();
             $table->string('motto')->nullable();
-            $table->string('cac_number')->unique();
+            $table->string('cac_number')->unique()->nullable();
             $table->string('industry')->nullable();
             $table->string('address')->nullable();
             $table->string('country')->nullable();

@@ -21,47 +21,42 @@
                                 onclick="$('#addNewAppModal').modal('hide')" aria-hidden="true"><i
                                     class="pg-icon">close</i>
                             </button>
-                            <h4 class="p-b-5"><span class="semi-bold">New</span> Menu</h4>
+                            <h4 class="p-b-5"><span class="semi-bold">New</span> Menu Category</h4>
                         </div>
 
                         <div class="modal-body">
-                            <p class="small-text">Create a new <b>menu</b> using this form, make sure you fill them all</p>
+                            <p class="small-text">Create a new <b>menu category</b> using this form, make sure you fill them all</p>
 
-                            <form method="post" action="{{ route('menu.item.store') }}" role="form"
-                                enctype="multipart/form-data">
+                            <form method="post" action="{{ route('menu.category.store') }}" role="form">
                                 @csrf
                                 @include('shared.feedback')
                                 <div class="row g-2">
                                     <div class="col-sm-12">
-                                        <div class="form-group form-group-default">
-                                            <label>Title</label>
-                                            <input name="menu_title" value="{{ old('menu_title') }}" type="text"
-                                                class="form-control" placeholder="Name of the menu">
+                                        <div class="form-group form-group-default required">
+                                            <label>Category Title</label>
+                                            <input name="menu_category_title" value="{{ old('menu_category_title') }}" type="text"
+                                                class="form-control" placeholder="Name of the category">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-group-default required">
+                                            <label>Menu</label>
+                                            <select class="form-control" id="input30" name="menu_item">
+                                                <option selected>Choose a menu</option>
+                                                @foreach($allMenuItem as $menu)
+                                                <option value="{{$menu->id}}">
+                                                    {{$menu->menu_title}}
+                                                </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
-                                            <label>Route</label>
-                                            <input name="menu_route" value="{{ old('menu_route') }}" type="text"
-                                                class="form-control" placeholder="Request route">
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Slug</label>
-                                            <input name="menu_slug" value="{{ old('menu_slug') }}" type="text"
-                                                class="form-control" placeholder="url">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Menu Position</label>
-                                            <input type="number" name="menu_position" step="1" id=""
+                                            <label>Position</label>
+                                            <input type="number" name="menu_category_position" step="1" id="" value="{{ old('menu_category_position') }}"
                                                 class="form-control" placeholder="Position">
                                         </div>
                                     </div>
@@ -69,7 +64,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
                                             <label for="" class="select-label">Status</label>
-                                            <select name="menu_status" id="" class="form-control">
+                                            <select name="menu_category_status" id="" class="form-control">
                                                 <option value="1">Active</option>
                                                 <option value="0" selected>Inactive</option>
                                             </select>
@@ -98,7 +93,7 @@
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Menu Records</li>
+                            <li class="breadcrumb-item active">Menu Category Records</li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">
@@ -145,7 +140,7 @@
                         <div class="pull-right">
                             <div class="col-xs-12">
                                 <button aria-label="" id="show-modal" class="btn btn-primary btn-cons"><i
-                                        class="pg-icon">add</i> Add menu
+                                        class="pg-icon">add</i> Add menu category
                                 </button>
                             </div>
                         </div>
@@ -158,21 +153,19 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Title</th>
-                                    <th>Route</th>
-                                    <th>Slug</th>
+                                    <th>Menu</th>
                                     <th>Position</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($allMenu as $key => $menu)
+                                @foreach ($allMenuCategory as $key => $category)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $menu->menu_title }}</td>
-                                        <td>{{ $menu->menu_route }}</td>
-                                        <td>{{ $menu->menu_slug }}</td>
-                                        <td>{{ $menu->menu_position }}</td>
-                                        <td>{{ $menu->menu_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ $category->menu_cat_title }}</td>
+                                        <td>{{ $category->menu_id }}</td>
+                                        <td>{{ $category->menu_cat_position }}</td>
+                                        <td>{{ $category->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

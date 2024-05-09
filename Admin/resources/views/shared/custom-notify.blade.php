@@ -39,10 +39,26 @@
             message: '{{ Session::get('warning') }}',
             position: 'top-right',
             timeout: 0,
-            type: 'info'
+            type: 'warning'
         }).show();
     </script>
 @endif
+{{-- error message --}}
+@if (Session::has('error'))
+    <script>
+        $(document).ready(()=> {
+            $('#addNewAppModal').modal('show');
+        });
+        $('.page-content-wrapper').pgNotification({
+            style: 'flip',
+            message: '{{ Session::get('error') }}',
+            position: 'top-right',
+            timeout: 0,
+            type: 'danger'
+        }).show();
+    </script>
+@endif
+
 
 @if ($errors->any())
     <script>

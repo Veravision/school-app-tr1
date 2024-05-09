@@ -149,15 +149,3 @@ const industryArray=[
     "Writing & Editing"
   ];
 
-  let industry = $('.industry-list')
-  // count=elmnt.length
-  
-  for (let index = 0; index < industry.length; index++) {
-      let element = industry[index];
-      console.log(element);
-      $.each(industryArray, (i, v) => {
-		// console.log(h);
-		element.innerHTML +=`<option value="${v}">${v}</option>`
-	});
-    
-  }
