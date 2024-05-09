@@ -153,6 +153,12 @@
                                 ><i class="pg-icon">mc</i></span
                             >
                         </li>
+                        <li class="">
+                          <a href="{{ route('sub.menu') }}">Sub Menu</a>
+                          <span class="icon-thumbnail"
+                              ><i class="pg-icon">sm</i></span
+                          >
+                      </li>
                     </ul>
                   </li>
                   <li class="">

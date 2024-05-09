@@ -14,10 +14,10 @@ class MenuCategoryController extends Controller
     public function index()
     {
         //
-        $fetchMenuItem = MenuItem::all();
-        $fetchMenuCategory = MenuCategory::orderBy('menu_cat_position')->get();
-        
-        return view('pages.menu-category')->with(['allMenuCategory' => $fetchMenuCategory,'allMenuItem'=>$fetchMenuItem]);
+        $fetchAllMenuItem = MenuItem::all();
+        $fetchAllMenuCategory = MenuCategory::orderBy('menu_cat_position')->get();
+
+        return view('pages.menu-category')->with(['allMenuCategory' => $fetchAllMenuCategory,'allMenuItem'=>$fetchAllMenuItem]);
     }
 
     /**

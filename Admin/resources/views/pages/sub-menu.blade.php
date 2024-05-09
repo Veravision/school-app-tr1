@@ -21,21 +21,21 @@
                                 onclick="$('#addNewAppModal').modal('hide')" aria-hidden="true"><i
                                     class="pg-icon">close</i>
                             </button>
-                            <h4 class="p-b-5"><span class="semi-bold">New</span> Menu Category</h4>
+                            <h4 class="p-b-5"><span class="semi-bold">New</span> Sub Menu</h4>
                         </div>
 
                         <div class="modal-body">
-                            <p class="small-text">Create a new <b>menu category</b> using this form, make sure you fill them all</p>
+                            <p class="small-text">Create a new <b>sub menu</b> using this form, make sure you fill them all</p>
 
-                            <form method="post" action="{{ route('menu.category.store') }}" role="form">
+                            <form method="post" action="{{ route('sub.menu.store') }}" role="form">
                                 @csrf
                                 @include('shared.feedback')
                                 <div class="row g-2">
                                     <div class="col-sm-12">
                                         <div class="form-group form-group-default required">
-                                            <label>Category Title</label>
-                                            <input name="menu_category_title" value="{{ old('menu_category_title') }}" type="text"
-                                                class="form-control" placeholder="Name of the category">
+                                            <label>Sub Menu Title</label>
+                                            <input name="sub_menu_title" value="{{ old('sub_menu_title') }}" type="text"
+                                                class="form-control" placeholder="Name of the sub menu">
                                         </div>
                                     </div>
 
@@ -52,11 +52,40 @@
                                             </select>
                                         </div>
                                     </div>
+                                    {{-- categories are shown based on the the menu selected since each category are created under a particular mnenu--}}
+                                    {{-- <div class="col-sm-12 hidden"> --}}
+                                        {{-- <div class="form-group form-group-default"> --}}
+                                            {{-- <label>Menu Category</label> --}}
+                                            {{-- <select class="form-control" id="input30" name="menu_category"> --}}
+                                                {{-- <option selected>Choose a category</option> --}}
+                                                {{-- @foreach($allMenuCategory as $category) --}}
+                                                {{-- <option value="{{$category->id}}"> --}}
+                                                    {{-- {{$category->menu_cat_title}} --}}
+                                                {{-- </option> --}}
+                                                {{-- @endforeach --}}
+                                            {{-- </select> --}}
+                                        {{-- </div> --}}
+                                    {{-- </div> --}}
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group form-group-default requires">
+                                            <label>Route</label>
+                                            <input type="text" name="sub_menu__route" step="1" id="" value="{{ old('sub_menu__route') }}"
+                                                class="form-control" placeholder="Route">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group form-group-default required">
+                                            <label>Slug</label>
+                                            <input type="text" name="sub_menu__slug"  id="" value="{{ old('sub_menu__slug') }}"
+                                                class="form-control" placeholder="Slug">
+                                        </div>
+                                    </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
                                             <label>Position</label>
-                                            <input type="number" name="menu_category_position" step="1" id="" value="{{ old('menu_category_position') }}"
+                                            <input type="number" name="sub_menu__position" step="1" id="" value="{{ old('sub_menu__position') }}"
                                                 class="form-control" placeholder="Position">
                                         </div>
                                     </div>
@@ -64,7 +93,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
                                             <label for="" class="select-label">Status</label>
-                                            <select name="menu_category_status" id="" class="form-control">
+                                            <select name="sub_menu__status" id="" class="form-control">
                                                 <option value="1">Active</option>
                                                 <option value="0" selected>Inactive</option>
                                             </select>
@@ -93,7 +122,7 @@
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Menu Category Records</li>
+                            <li class="breadcrumb-item active">Sub Menu Records</li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">
@@ -140,7 +169,7 @@
                         <div class="pull-right">
                             <div class="col-xs-12">
                                 <button aria-label="" id="show-modal" class="btn btn-primary btn-cons"><i
-                                        class="pg-icon">add</i> Add menu category
+                                        class="pg-icon">add</i> Add sub menu
                                 </button>
                             </div>
                         </div>
@@ -154,18 +183,24 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Menu</th>
+                                    <th>Menu Category</th>
+                                    <th>Route</th>
+                                    <th>Slug</th>
                                     <th>Position</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($allMenuCategory as $key => $category)
+                                @foreach ($allSubMenu as $key => $subMenu)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $category->menu_cat_title }}</td>
-                                        <td>{{ $category->menu_id }}</td>
-                                        <td>{{ $category->menu_cat_position }}</td>
-                                        <td>{{ $category->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ $subMenu->sub_menu_title }}</td>
+                                        <td>{{ $subMenu->menu_id }}</td>
+                                        <td>{{ $subMenu->menu_category_id }}</td>
+                                        <td>{{ $subMenu->sub_menu_route }}</td>
+                                        <td>{{ $subMenu->sub_menu_slug }}</td>
+                                        <td>{{ $subMenu->sub_menu_position }}</td>
+                                        <td>{{ $subMenu->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sub_menus', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('menu_id');
-            $table->bigInteger('menu_category_id');
+            $table->bigInteger('menu_category_id')->nullable();
             $table->string('sub_menu_title');
             $table->string('sub_menu_status')->default(0);
             $table->string('sub_menu_position')->nullable();

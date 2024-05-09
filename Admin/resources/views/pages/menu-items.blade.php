@@ -52,15 +52,15 @@
 
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
-                                            <label>Slog</label>
-                                            <input name="menu_slog" value="{{ old('menu_slog') }}" type="text"
+                                            <label>Slug</label>
+                                            <input name="menu_slug" value="{{ old('menu_slug') }}" type="text"
                                                 class="form-control" placeholder="url">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default">
-                                            <label>Menu position</label>
+                                            <label>Menu Position</label>
                                             <input type="number" name="menu_position" step="1" id=""
                                                 class="form-control" placeholder="Position">
                                         </div>
@@ -159,7 +159,7 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Route</th>
-                                    <th>Slog</th>
+                                    <th>Slug</th>
                                     <th>Position</th>
                                     <th>Status</th>
                                 </tr>

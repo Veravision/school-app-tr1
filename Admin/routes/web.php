@@ -41,4 +41,8 @@ Route::middleware([
         Route::get('menu-category', 'index')->name('menu.category');
         Route::post('menu_category-store', 'store')->name('menu.category.store');
     });
+    Route::controller(SubMenuCategoryController::class)->group(function(){
+        Route::get('sub-menu', 'index')->name('sub.menu');
+        Route::post('sub-menu-store', 'store')->name('sub.menu.store');
+    });
 });
