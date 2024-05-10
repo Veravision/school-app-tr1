@@ -12,7 +12,7 @@
         <!-- START PAGE CONTENT -->
         <div class="content ">
             <!-- START JUMBOTRON -->
-            <div class="jumbotron" data-pages="parallax">
+            <div class="jumbotron">
                 <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
                     <div class="inner">
                         <!-- START BREADCRUMB -->
@@ -138,20 +138,19 @@
             </div>
             <!-- END JUMBOTRON -->
 
-            {{-- start sub menu menu --}}
-            <section class="mt-2">
-                <div class="jumbotron">
-                <div class="container-fluid">
+            <!-- START SUB MENU -->
+            <div class="jumbotron mt-2">
+                <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
                     <div class="inner">
-                        <div class="col-lg-8">
-                            <div class="row">
-                                <div class="fullheight">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <p class="small-text">Create a new <b>sub menu</b> using this form, make
-                                                sure
-                                                you fill them all</p>
-
+                        <div class="row">
+                            <div class="col-lg-6 ">
+                                <!-- START card -->
+                                <div class="full-height">
+                                    <div class="card-body">
+                                        {{-- cat creation --}}
+                                        <p class="small-text">Create a new <b>sub menu</b> using this form, make
+                                            sure
+                                            you fill them all</p>
                                             <form method="post" action="{{ route('sub.menu.store') }}" role="form">
                                                 @csrf
                                                 @include('shared.feedback')
@@ -239,71 +238,61 @@
                                                 <div class="modal-footer">
                                                     <button aria-label="" type="submit"
                                                         class="btn btn-primary  btn-cons">Add</button>
-                                                    <button type="button" class="btn btn-cons"
-                                                        onclick="$('#addNewAppModal').modal('hide')">Close</button>
+                                                    <button type="reset" class="btn btn-cons">Reset</button>
                                                 </div>
                                             </form>
+                                    </div>
+                                </div>
+                                <!-- END card -->
+                            </div>
+                            <div class="col-xl-5 col-lg-6 ">
+                                <!-- START card -->
+                                <div class="card card-transparent">
+                                    <div class="card-header ">
+                                        <div class="card-title">Menu Category
+                                        </div>
+                                    </div>
+                                    <div class="card-body"
+                                        style="display: flex; flex-wrap: wrap; height: 250px; overflow:auto;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped" id="stripedTable">
+                                                <thead class="">
+                                                    <tr>
+                                                        <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user
+                                                                  Comman Practice Followed
+                                                                  -->
+                                                        <th style="width:10%">Category</th>
+                                                        <th style="width:50%">Status</th>
+                                                        <th style="width:40%">Level</th>
+                                                        <th style="width:40%">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{-- <tr>
+                                                  <td class="v-align-middle semi-bold">
+                                                    <p>First Tour</p>
+                                                  </td>
+                                                  <td class="v-align-middle"><a href="#" class="btn">United States</a><a href="#" class="btn">India</a>
+                                                  </td>
+                                                  <td class="v-align-middle">
+                                                    <p>it is more then ONE nation/nationality as its...</p>
+                                                  </td>
+                                                  <td></td>
+                                                </tr> --}}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- END card -->
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
-            </section>
-            {{-- start sub menu --}}
-            <!-- START CONTAINER FLUID -->
-            <div class=" container-fluid   container-fixed-lg">
-                <!-- START card -->
-                <div class="card card-transparent">
-                    <div class="card-header ">
-                        <div class="card-title">Table with Dynamic Rows
-                        </div>
-                        <div class="pull-right">
-                            <div class="col-xs-12">
-                                <button aria-label="" id="show-modal" class="btn btn-primary btn-cons"><i
-                                        class="pg-icon">add</i> Add sub menu
-                                </button>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover demo-table-dynamic table-responsive-block"
-                            id="tableWithDynamicRows">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Menu</th>
-                                    <th>Menu Category</th>
-                                    <th>Route</th>
-                                    <th>Slug</th>
-                                    <th>Position</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($allSubMenu as $key => $subMenu)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $subMenu->sub_menu_title }}</td>
-                                        <td>{{ $subMenu->menu_id }}</td>
-                                        <td>{{ $subMenu->menu_category_id }}</td>
-                                        <td>{{ $subMenu->sub_menu_route }}</td>
-                                        <td>{{ $subMenu->sub_menu_slug }}</td>
-                                        <td>{{ $subMenu->sub_menu_position }}</td>
-                                        <td>{{ $subMenu->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- END card -->
             </div>
-            <!-- END CONTAINER FLUID -->
+            <!-- END SUB MENU -->
+
+
         </div>
     </x-slot>
     @section('scripts')
