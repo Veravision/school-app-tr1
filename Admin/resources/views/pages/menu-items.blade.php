@@ -247,7 +247,7 @@
                     });
 
                     // Add event listener for opening and closing details
-                    $('#detailedTable tbody').on('click', 'tr', function() {
+                    $('#detailedTable tbody').on('click', 'td:first-child', function() {
                         //var row = $(this).parent()
                         if ($(this).hasClass('shown') && $(this).next().hasClass('row-details')) {
                             $(this).removeClass('shown');
@@ -258,7 +258,7 @@
                         var row = table.DataTable().row(tr);
 
                         $(this).parents('tbody').find('.shown').removeClass('shown');
-                        $(this).parents('tbody').find('.row-details').remove();
+                        $('#detailedTable tbody tr').parents('tbody').find('.row-details').remove();
 
                         row.child(_format(row.data())).show();
                         tr.addClass('shown');
