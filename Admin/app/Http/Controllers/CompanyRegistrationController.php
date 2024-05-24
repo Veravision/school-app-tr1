@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanyRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 class CompanyRegistrationController extends Controller
@@ -25,7 +26,20 @@ class CompanyRegistrationController extends Controller
     {
         //
         $fetchCompany = CompanyRegistration::first();
-        return view('pages.company')->with(['companyRecord'=>$fetchCompany]);
+        $phoneNumberCollection = Str::of($fetchCompany->phone_number)->explode('_');
+        $officeNumberCollection = Str::of($fetchCompany->office_number)->explode('_');
+        $whatsappNumberCollection = Str::of($fetchCompany->whatsapp_number)->explode('_');
+        $ownerPhoneNumberCollection = Str::of($fetchCompany->owner_phone_number)->explode('_');
+        return view('pages.company')->with(['companyRecord'=>$fetchCompany,
+                                            'phone_number_code'=>$phoneNumberCollection[0],
+                                            'phone_number'=>$phoneNumberCollection[1],
+                                            'office_number_code'=>$officeNumberCollection[0],
+                                            'office_number'=>$officeNumberCollection[1],
+                                            'whatsapp_number_code'=> $whatsappNumberCollection[0],
+                                            'whatsapp_number'=> $whatsappNumberCollection[1],
+                                            'owner_phone_number_code'=>$ownerPhoneNumberCollection[0],
+                                            'owner_phone_number'=>$ownerPhoneNumberCollection[1],
+                                           ]);
     }
 
     /**
@@ -82,15 +96,15 @@ class CompanyRegistrationController extends Controller
          'country'                   =>$request->country,
          'city'                      =>$request->city,
          'zip_code'                  =>$request->zip_code,
-         'phone_number'              =>$request->phone_number_code.$request->phone_number,
-         'office_number'             =>$request->office_number_code.$request->office_number,
-         'whatsapp_number'           =>$request->whatsapp_number_code.$request->whatsapp_number,
+         'phone_number'              =>$request->phone_number_code."_".$request->phone_number,
+         'office_number'             =>$request->office_number_code."_".$request->office_number,
+         'whatsapp_number'           =>$request->whatsapp_number_code."_".$request->whatsapp_number,
          'email'                     =>$request->email,
          'instagram_handle'          =>$request->instagram_handle,
          'facebook_page'             =>$request->facebook_page,
          'owner_first_name'          =>$request->owner_first_name,
          'owner_last_name'           =>$request->owner_last_name,
-         'owner_phone_number'        =>$request->owner_phone_number_code.$request->owner_phone_number,
+         'owner_phone_number'        =>$request->owner_phone_number_code."_".$request->owner_phone_number,
          'owner_email'               =>$request->owner_email,
          'status'                    =>(isset($request->status))? $request->status:0,  
          'photo_path'                =>$company_photo_path,

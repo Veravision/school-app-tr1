@@ -92,6 +92,7 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
+            @include('shared.feedback')
             <!-- START JUMBOTRON -->
             <div class="jumbotron" data-pages="parallax">
                 <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
@@ -136,13 +137,16 @@
                 </div>
             </div>
             <!-- END JUMBOTRON -->
+            {{-- Show Edit Form --}}
+            <div class="container-fluid" id="display-menu-edit"></div>
+            {{-- End Show Edit Form --}}
             <!-- START CONTAINER FLUID -->
             <div class=" container-fluid   container-fixed-lg">
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <!-- START card -->
                     <div class="card card-transparent">
                         <div class="card-header ">
-                            <div class="card-title">Table with Dynamic Rows
+                            <div class="card-title">Available Menu
                             </div>
                             <div class="pull-right">
                                 <div class="col-xs-12">
@@ -161,9 +165,6 @@
                                     <tr>
                                         {{-- <th  style="width:1%" class="text-center">S/N</th> --}}
                                         <th style="width:20%">Title</th>
-                                        {{-- <th style="width:15%">Route</th> --}}
-                                        {{-- <th style="width:15%">Slug</th> --}}
-                                        {{-- <th style="width:2%" class="text-center">Position</th> --}}
                                         <th style="width:15%">Status</th>
                                         <th style="width:20%">Actions</th>
                                     </tr>
@@ -178,10 +179,14 @@
                                             <td>{{ $menu->menu_status == 1 ? 'Active' : 'Inactive' }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{route('sub.menu')}}" class="btn btn-link text-primary">Setup Sub-menu</a>
-                                                    {!! $menu->menu_status == 1 ? '<a href="" class="btn btn-danger">De-activate</a>' : '<a href="" class="btn btn-success">Activate</a>' !!}
-                                                    <a href="" class="btn btn-warning">Edit</a>
-                                                    <a href="" class="btn btn-danger">Trash</a>
+                                                    <a href="{{ route('menu.item',['id'=> encrypt($menu->id)]) }}"
+                                                        class="btn btn-link text-primary">Setup Sub-menu</a>
+                                                    {!! $menu->menu_status == 1
+                                                        ? '<a href="" class="btn btn-danger">De-activate</a>'
+                                                        : '<a href="" class="btn btn-success">Activate</a>' !!}
+                                                    <a href="#" class="btn btn-warning" id="editForm"
+                                                        onclick="ShowEditMenuForm('{{ $menu->id }}', '{{ $menu->menu_title }}', '{{ $menu->menu_route }}', '{{ $menu->menu_slug }}', '{{ $menu->menu_position }}', '{{ $menu->menu_status }}')">Edit</a>
+                                                    <a href="" class="btn btn-danger" onclick="ComfirmMenuItemDelete('{{ $menu->id }}', '{{ $menu->menu_title }}')">Delete</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -269,6 +274,147 @@
                 initDetailedViewTable();
             })(window.jQuery);
         </script>
+        <script>
+            // show  Menu Edit Form
+            // document.getElementById('editForm').addEventListener('click', function(event) {
+            //     document.getElementById('hideImg').style.display="none";
+            //     document.getElementById('showForm').style.display="block";
+            //     event.preventDefault()
+            // })
+
+            // function for assigning edit values
+            $(document).ready(() => {
+                $('#display-menu-edit').hide();
+            });
+            // let menuContainer = document.querySelector('#display-menu-edit')
+            // menuContainer.classList.add('d-none')
+            let ShowEditMenuForm = (menuID, menuTitle, menuRoute, menuSlug, menuPosition, menuStatus) => {
+                console.log(menuID, menuTitle, menuRoute, menuPosition, menuSlug, menuStatus);
+
+                let FormMenu = `
+                <form 
+                    method="post"
+                    action="{{ route('menu.item.update') }}"
+                    role="form"
+                    id = "edit-menu-form"
+                    >
+                    @csrf
+                    <div id="feedback"></div>
+                    <input type="hidden" value="${menuID}" name="menu_id" />
+                    <div class="row g-2">
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                <label>Title</label>
+                                <input name="menu_title" value="${menuTitle}" type="text"
+                                    class="form-control" placeholder="Name of the menu">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default required">
+                                <label>Route</label>
+                                <input name="menu_route" value="${menuRoute}" type="text"
+                                    class="form-control" placeholder="Request route">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default required">
+                                <label>Slug</label>
+                                <input name="menu_slug" value="${menuSlug}" type="text"
+                                    class="form-control" placeholder="url">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default">
+                                <label>Menu Position</label>
+                                <input type="number" value="${menuPosition}" name="menu_position" min="0" step="1"
+                                    id="" class="form-control" placeholder="Position">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default">
+                                <label for="" class="select-label">Status</label>
+                                <select name="menu_status" id="" class="form-control">
+                                    <option value="1" ${(menuStatus == 1)?"selected":""}>Active</option>
+                                    <option value="0" ${(menuStatus == 0)?"selected":""}>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button aria-label="" type="button" class="btn btn-primary btn-cons" id="save-menu-btn">Save</button>
+                    </div>
+                </form> `;
+                $('#display-menu-edit').show(1000)
+                $('#display-menu-edit').empty()
+                $('#display-menu-edit').append(`                <div class="col-lg-6 my-2 bg-white" id="editFormContainer">
+                    <div class="card card-transparent">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="card-title">Edit Menu</div>
+                            <a class="btn btn-link text-danger px-1 pt-0" style="border-radius: 0px; cursor: pointer;" onclick="$('#editFormContainer').hide();">x</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="" id="display-menu-edit-form"></div>
+                    </div>
+                </div>`)
+                $('#display-menu-edit-form').empty();
+                $('#display-menu-edit-form').append(FormMenu);
+
+                $('#save-menu-btn').on('click', () => {
+                    // alert("hello")
+                    let url = $('form#edit-menu-form').attr('action')
+                    let method = $('form#edit-menu-form').attr('method')
+                    let FormData = $('form#edit-menu-form').serialize();
+                    console.log(url, method, FormData);
+
+                    $.ajax({
+                        url: url,
+                        type: method,
+                        data: FormData,
+                        success: (resp) => {
+                            console.log(resp);
+                            if (resp.status == 200) {
+                                $('#feedback').empty();
+                                $('#feedback').append(`
+                                <div class="alert alert-success" alert>
+                                    <h4 class="text-success">Success!</h4>
+                                    <p>${resp.message}</p>
+                                </div>
+                                `);
+                            }
+
+                            if (resp.status == 422) {
+                                $('#feedback').empty();
+                                $('#feedback').append(
+                                    `<div class="alert alert-error" alert><h4 class="text-danger">Error!</h4><ul id= 'error'></ul></div>`
+                                    );
+                                $.each(resp.error, function(i, v) {
+                                    console.log(v);
+                                    $('#error').append(`
+                                                <li>${v}</li>
+                                       `);
+                                });
+                            }
+                        }
+                    });
+
+                });
+
+            }
+
+            let ComfirmMenuItemDelete = (menuId, menuTitle) => {
+                console.log(menuId, menuTitle);
+                let answer = confirm("Delete this menu item? " + menuTitle);
+                if(answer == true){
+                    var route ="{{ route('menu.item.delete', ':menuId') }}";
+                    route = route.replace(':menuId',menuId);
+                    window.location.href=route;
+                   
+                }
+                
+            }
+        </script>
+
         @include('shared.custom-notify')
     @endsection
 </x-app-layout>

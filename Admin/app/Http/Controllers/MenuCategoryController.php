@@ -14,8 +14,8 @@ class MenuCategoryController extends Controller
     public function index()
     {
         //
-        $fetchAllMenuItem = MenuItem::all();
-        $fetchAllMenuCategory = MenuCategory::orderBy('menu_cat_position')->get();
+        $fetchAllMenuItem = MenuItem::all()->where('is_delete','0');
+        $fetchAllMenuCategory = MenuCategory::where('is_delete','0')->orderBy('menu_cat_position')->get();
 
         return view('pages.menu-category')->with(['allMenuCategory' => $fetchAllMenuCategory,'allMenuItem'=>$fetchAllMenuItem]);
     }
@@ -35,7 +35,7 @@ class MenuCategoryController extends Controller
     {
         //
         $request -> validate([
-            'menu_category_title'        => 'required|max:255|unique:menu_categories,menu_cat_title',
+            'menu_category_title'        => 'required|max:255',
             'menu_item'                  => 'required|max:255',
             'menu_category_position'     => 'nullable',
             'menu_category_status'       => 'nullable'
@@ -70,16 +70,40 @@ class MenuCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MenuCategory $menuCategory)
+    public function update(Request $request)
     {
         //
+        $request -> validate([
+            'menu_category_title'        => 'required|max:255',
+            'menu_item'                  => 'required|max:255',
+            'menu_category_position'     => 'nullable',
+            'menu_category_status'       => 'nullable'
+        ]);
+
+        $menuCategory = MenuCategory::find($request->menu_category_id);
+        $menuCategory->menu_cat_title       = $request->menu_category_title;
+        $menuCategory->menu_id              = $request->menu_item;
+        $menuCategory->menu_cat_position    = $request->menu_category_position;
+        $menuCategory->menu_cat_status      = $request->menu_category_status;
+
+        $menuCategory->save();
+        return back()->withInput()->with(['success'=>'Record updated successfully.']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MenuCategory $menuCategory)
+    public function destroy($id)
     {
         //
+        $menuCategory = MenuCategory::find($id);
+        $menuCategory->is_delete = "1";
+        $menuCategory->save();
+        if ($menuCategory->save() == true){
+            return back()->with(['success'=>'Menu Category deleted successfully.']);
+        }
+        else{
+            return back()->with(['error'=>'Cannot delete menu Category.']);
+        }
     }
 }

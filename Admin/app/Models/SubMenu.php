@@ -9,11 +9,13 @@ class SubMenu extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'mid'           ,
-        'mcatid'        ,
-        'subm_title'    ,
-        'subm_status'   ,
-        'subm_position' , 
+        'menu_id',
+        'menu_category_id',
+        'sub_menu_title',
+        'sub_menu_route',
+        'sub_menu_slug',
+        'sub_menu_status',
+        'sub_menu_position', 
     ];
     
 }

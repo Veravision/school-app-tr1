@@ -14,5 +14,6 @@ class MenuItem extends Model
         'menu_position',
         'menu_route',
         'menu_slug',
+        'is_delete',
     ];
 }

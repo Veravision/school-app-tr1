@@ -99,14 +99,14 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="phone_number_code"
-                                                value="{{ empty(old('phone_number_code')) ? $companyRecord->phone_number_code : old('phone_number_code') }}"
+                                                value="{{ empty(old('phone_number_code')) ? $phone_number_code : old('phone_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
                                                 id="basic-addon1">
 
                                             </select>
                                             <input type="text" class="form-control ph-number" name="phone_number"
                                                 id="company-ph-number" placeholder=""
-                                                value="{{ empty(old('phone_number')) ? $companyRecord->phone_number : old('phone_number') }}"
+                                                value="{{ empty(old('phone_number')) ? $phone_number : old('phone_number') }}"
                                                 aria-describedby="basic-addon1">
                                         </div>
                                     </div>
@@ -117,13 +117,13 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="office_number_code"
-                                                value="{{ empty(old('office_number_code')) ? $companyRecord->office_number_code : old('office_number_code') }}"
+                                                value="{{ empty(old('office_number_code')) ? $office_number_code : old('office_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
                                                 id="basic-addon1">
 
                                             </select>
                                             <input type="text" class="form-control ph-number" name="office_number"
-                                                value="{{ empty(old('office_number')) ? $companyRecord->office_number : old('office_number') }}"
+                                                value="{{ empty(old('office_number')) ? $office_number : old('office_number') }}"
                                                 id="company-ph-number" placeholder="" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
@@ -134,14 +134,14 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="whatsapp_number_code"
-                                                value="{{ empty(old('whatsapp_number_code')) ? $companyRecord->whatsapp_number_code : old('whatsapp_number_code') }}"
+                                                value="{{ empty(old('whatsapp_number_code')) ? $whatsapp_number_code : old('whatsapp_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
                                                 id="basic-addon1">
 
                                             </select>
                                             <input type="text" class="form-control ph-number"
                                                 name="whatsapp_number"
-                                                value="{{ empty(old('whatsapp_number')) ? $companyRecord->whatsapp_number : old('whatsapp_number') }}"
+                                                value="{{ empty(old('whatsapp_number')) ? $whatsapp_number : old('whatsapp_number') }}"
                                                 id="company-ph-number" placeholder=""
                                                 aria-describedby="basic-addon1">
                                         </div>
@@ -258,14 +258,14 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="owner_phone_number_code"
-                                                value="{{ empty(old('owner_phone_number_code')) ? $companyRecord->owner_phone_number_code : old('owner_phone_number_code') }}"
+                                                value="{{ empty(old('owner_phone_number_code')) ? $owner_phone_number_code : old('owner_phone_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
                                                 id="basic-addon1">
 
                                             </select>
                                             <input type="text" class="form-control ph-number"
                                                 name="owner_phone_number" id="company-ph-number" placeholder=""
-                                                value="{{ empty(old('owner_phone_number')) ? $companyRecord->owner_phone_number : old('owner_phone_number') }}"
+                                                value="{{ empty(old('owner_phone_number')) ? $owner_phone_number : old('owner_phone_number') }}"
                                                 aria-describedby="basic-addon1">
                                         </div>
                                     </div>

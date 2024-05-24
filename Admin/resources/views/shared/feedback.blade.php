@@ -28,14 +28,14 @@
 {{-- warning message --}}
 @if(Session::has('warning'))
 <div class="alert alert-warning" alert>
-    <h4 class="text-warning">Success!</h4>
+    <h4 class="text-warning">Warning!</h4>
     <p>{{ Session::get('warning') }}</p>
 </div>
 @endif
 {{-- error message --}}
 @if(Session::has('error'))
 <div class="alert alert-danger" alert>
-    <h4 class="text-danger">Success!</h4>
+    <h4 class="text-danger">Error!</h4>
     <p>{{ Session::get('error') }}</p>
 </div>
 @endif
