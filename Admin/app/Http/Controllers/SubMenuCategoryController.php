@@ -27,7 +27,11 @@ class SubMenuCategoryController extends Controller
     {
         //
         $fetchMenu = MenuItem::where('is_delete','0')->orderBy('menu_position')->get();
-        $fetchAllSubMenu = SubMenu::orderBy('sub_menu_position')->get();
+        $fetchAllSubMenu = SubMenu::Join('menu_items', 'menu_items.id','=','sub_menus.menu_id')
+        ->leftJoin('menu_categories', 'menu_categories.id', '=', 'sub_menus.menu_category_id')
+        ->orderBy('sub_menu_position')
+        ->select('*', 'sub_menus.id as sub_menus_id', 'menu_items.id as menu_id', 'menu_categories.id as menu_category_id', 'sub_menus.created_at as sub_menu_created_at', 'sub_menus.updated_at as sub_menu_updated_at')->get();
+        // dd($fetchAllSubMenu);
         return view('pages.sub-menu')->with(["allMenu"=>$fetchMenu, "allSubMenu"=>$fetchAllSubMenu]);
     }
 
@@ -61,7 +65,7 @@ class SubMenuCategoryController extends Controller
         $request->validate([
             'sub_menu_title'        =>'required|max:255|unique:sub_menus,sub_menu_title',
             'menu_item'             =>'required',
-            // 'menu_category'         =>'nullable',
+            'menu_category'         =>'nullable',
             'sub_menu_route'       =>'required',
             'sub_menu_slug'        =>'required',
             'sub_menu_position'    =>'nullable',
@@ -70,13 +74,13 @@ class SubMenuCategoryController extends Controller
         SubMenu::create([
             'sub_menu_title'        =>$request->sub_menu_title,
             'menu_id'               =>$request->menu_item,
-            // 'menu_category_id'      =>$request->menu_category,
+            'menu_category_id'      =>$request->menu_category,
             'sub_menu_route'       =>$request->sub_menu_route,
             'sub_menu_slug'        =>$request->sub_menu_slug,
             'sub_menu_position'    =>$request->sub_menu_position,
             'sub_menu_status'      =>(isset($request->sub_menu_status))? $request->sub_menu_status:0,
         ]);
-        return back()->withIpute()->with(['success'=>"Sub menu has been created successfully."]);
+        return back()->withInput()->with(['success'=>"Sub menu has been created successfully."]);
     }
 
     /**

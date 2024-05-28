@@ -96,13 +96,16 @@ class MenuCategoryController extends Controller
     public function destroy($id)
     {
         //
+        // dd($id);
         $menuCategory = MenuCategory::find($id);
         $menuCategory->is_delete = "1";
         $menuCategory->save();
         if ($menuCategory->save() == true){
+            // return "done";
             return back()->with(['success'=>'Menu Category deleted successfully.']);
         }
         else{
+            // return "not done";
             return back()->with(['error'=>'Cannot delete menu Category.']);
         }
     }

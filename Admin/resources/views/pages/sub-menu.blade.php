@@ -19,7 +19,7 @@
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Menu</a></li>
-                            <li class="breadcrumb-item active">Sub Menu Setup</li>
+                            <li class="breadcrumb-item active">Setup</li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">
@@ -205,18 +205,18 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group form-group-default required">
                                                                 <label>Route</label>
-                                                                <input type="text" name="sub_menu__route"
+                                                                <input type="text" name="sub_menu_route"
                                                                     step="1" id=""
-                                                                    value="{{ old('sub_menu__route') }}"
+                                                                    value="{{ old('sub_menu_route') }}"
                                                                     class="form-control" placeholder="Route">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group form-group-default required">
                                                                 <label>Slug</label>
-                                                                <input type="text" name="sub_menu__slug"
+                                                                <input type="text" name="sub_menu_slug"
                                                                     id=""
-                                                                    value="{{ old('sub_menu__slug') }}"
+                                                                    value="{{ old('sub_menu_slug') }}"
                                                                     class="form-control" placeholder="Slug">
                                                             </div>
                                                         </div>
@@ -224,9 +224,9 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group form-group-default">
                                                                 <label>Position</label>
-                                                                <input type="number" name="sub_menu__position"
+                                                                <input type="number" name="sub_menu_position"
                                                                     min="0" step="1"
-                                                                    value="{{ old('sub_menu__position') }}"
+                                                                    value="{{ old('sub_menu_position') }}"
                                                                     class="form-control" placeholder="Position">
                                                             </div>
                                                         </div>
@@ -235,7 +235,7 @@
                                                             <div class="form-group form-group-default">
                                                                 <label for=""
                                                                     class="select-label">Status</label>
-                                                                <select name="sub_menu__status" id=""
+                                                                <select name="sub_menu_status" id=""
                                                                     class="form-control">
                                                                     <option value="1">Active</option>
                                                                     <option value="0" selected>Inactive</option>
@@ -270,7 +270,7 @@
                         </div>
                         <div class="pull-right">
                             <div class="col-xs-12">
-                                <input type="text" name="search-sub_menu"  value="" class="form-control" placeholder="serch by sub menu">
+                                <input type="text" name="search-sub_menu"  value="" class="form-control" style="text-align:center" placeholder="Search here">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -280,7 +280,7 @@
                             id="tableWithDynamicRows">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th style="width:5%">S/N</th>
                                     <th>Title</th>
                                     <th>Menu</th>
                                     <th>Menu Category</th>
@@ -288,21 +288,30 @@
                                     <th>Slug</th>
                                     <th>Position</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($allSubMenu as $key => $subMenu)
+                                @foreach ($allSubMenu as $key => $subMenu)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $subMenu->sub_menu_title }}</td>
-                                        <td>{{ $subMenu->menu_id }}</td>
-                                        <td>{{ $subMenu->menu_category_id }}</td>
+                                        <td>{{ $subMenu->menu_title }}</td>
+                                        <td>{{ $subMenu->menu_cat_title }}</td>
                                         <td>{{ $subMenu->sub_menu_route }}</td>
                                         <td>{{ $subMenu->sub_menu_slug }}</td>
                                         <td>{{ $subMenu->sub_menu_position }}</td>
-                                        <td>{{ $subMenu->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ $subMenu->sub_menu_status == 1 ? 'Active' : 'Inactive' }}</td>
+                                        <td>
+                                            <div class="">
+                                                <a href="#" class="btn text-warning" id=""
+                                                    onclick=""><i class="pg-icon">edit</i></a>
+                                                <a href="" class="btn text-danger" id=""
+                                                    onclick=""><i class="pg-icon">trash</i></a>
+                                            </div>
+                                        </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -365,9 +374,9 @@
                                     <td>${(v.menu_cat_status == 0)? "<span class='badge badge-warning'>Inactive</span>": "<span class='badge badge-success'>active</span>"}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn text-info" href="${v.id}"><i class="pg-icon">eye</i></a>
+                                            <a class="btn text-info" href="#"><i class="pg-icon">eye</i></a>
                                             <a class="btn text-warning" href="#" onclick = 'repopulate_category("${v.id}", "${v.menu_id}", "${v.menu_cat_title}", "${v.menu_cat_position}", "${v.menu_cat_status}")'><i class="pg-icon">pencil</i></a>
-                                            <a class="btn text-danger" href="${v.id}" onclick='ComfirmMenuCategoryDelete("${v.id}", "${v.menu_cat_title}")'><i class="pg-icon">trash</i></a>
+                                            <a class="btn text-danger" href="#" onclick='ComfirmMenuCategoryDelete("${v.id}", "${v.menu_cat_title}")'><i class="pg-icon">trash</i></a>
                                         </div>
                                     </td>
                                     </tr>`
@@ -510,10 +519,10 @@
                 console.log(categoryId, categoryTitle);
                 let answer = confirm("Delete this menu category? " + categoryTitle);
                 if(answer == true){
+                    // alert('hello')
                     var route ="{{ route('menu.category.delete', ':categoryId') }}";
                     route = route.replace(':categoryId',categoryId);
                     window.location.href = route;
-                   
                 }
                 
             }

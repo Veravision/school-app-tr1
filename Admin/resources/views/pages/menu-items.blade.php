@@ -142,7 +142,7 @@
             {{-- End Show Edit Form --}}
             <!-- START CONTAINER FLUID -->
             <div class=" container-fluid   container-fixed-lg">
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <!-- START card -->
                     <div class="card card-transparent">
                         <div class="card-header ">
@@ -164,29 +164,23 @@
                                 <thead>
                                     <tr>
                                         {{-- <th  style="width:1%" class="text-center">S/N</th> --}}
-                                        <th style="width:20%">Title</th>
-                                        <th style="width:15%">Status</th>
-                                        <th style="width:20%">Actions</th>
+                                        <th style="width:50%">Title</th>
+                                        <th style="width:5%">Status</th>
+                                        <th style="width:5%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($allMenu as $key => $menu)
-                                        <tr>
+                                        <tr data-row="{{$menu}}">
                                             <td>{{ $menu->menu_title }}</td>
-                                            {{-- <td>{{ $menu->menu_route }}</td> --}}
-                                            {{-- <td>{{ $menu->menu_slug }}</td> --}}
-                                            {{-- <td>{{ $menu->menu_position }}</td> --}}
                                             <td>{{ $menu->menu_status == 1 ? 'Active' : 'Inactive' }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="{{ route('menu.item',['id'=> encrypt($menu->id)]) }}"
-                                                        class="btn btn-link text-primary">Setup Sub-menu</a>
-                                                    {!! $menu->menu_status == 1
-                                                        ? '<a href="" class="btn btn-danger">De-activate</a>'
-                                                        : '<a href="" class="btn btn-success">Activate</a>' !!}
-                                                    <a href="#" class="btn btn-warning" id="editForm"
-                                                        onclick="ShowEditMenuForm('{{ $menu->id }}', '{{ $menu->menu_title }}', '{{ $menu->menu_route }}', '{{ $menu->menu_slug }}', '{{ $menu->menu_position }}', '{{ $menu->menu_status }}')">Edit</a>
-                                                    <a href="" class="btn btn-danger" onclick="ComfirmMenuItemDelete('{{ $menu->id }}', '{{ $menu->menu_title }}')">Delete</a>
+                                                        class="btn text-primary"><i class="pg-icon">settings</i></a>
+                                                    <a href="#" class="btn text-warning" id="editForm"
+                                                        onclick="ShowEditMenuForm('{{ $menu->id }}', '{{ $menu->menu_title }}', '{{ $menu->menu_route }}', '{{ $menu->menu_slug }}', '{{ $menu->menu_position }}', '{{ $menu->menu_status }}')"><i class="pg-icon">edit</i></a>
+                                                    <a href="" class="btn text-danger" onclick="ComfirmMenuItemDelete('{{ $menu->id }}', '{{ $menu->menu_title }}')"><i class="pg-icon">trash</i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -227,12 +221,12 @@
                         console.log(d);
                         return `<table class="table table-inline">
                             <tr>
-                            <td>Menu Name:</td> 
-                            <td>${d[0]}</td>
+                                <td>Menu Name:</td> 
+                                <td>${d[0]}</td>
                             </tr>
                             <tr> 
-                            <td>PSDs included</td>
-                            <td>USD 3000</td>
+                            <td>Status</td>
+                            <td>${d[1]}</td>
                             </tr>
                             <tr> 
                             <td>Extra info</td> 
@@ -261,11 +255,13 @@
                         }
                         var tr = $(this).closest('tr');
                         var row = table.DataTable().row(tr);
+                        console.log(tr.find('[data-row]'));
+
 
                         $(this).parents('tbody').find('.shown').removeClass('shown');
                         $('#detailedTable tbody tr').parents('tbody').find('.row-details').remove();
 
-                        row.child(_format(row.data())).show();
+                        row.child(_format(['home', 'active'])).show();
                         tr.addClass('shown');
                         tr.next().addClass('row-details');
                     });
@@ -275,7 +271,7 @@
             })(window.jQuery);
         </script>
         <script>
-            
+
             // function for assigning edit values
             $(document).ready(() => {
                 $('#display-menu-edit').hide();

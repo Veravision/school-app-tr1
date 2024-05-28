@@ -175,10 +175,10 @@
                                         <td>{{ $category->menu_cat_status == 1 ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="#" class="btn btn-warning" id=""
-                                                    onclick="ShowEditMenuCategoryForm('{{ $category->id }}', '{{ $category->menu_cat_title }}', '{{ $category->menu_id }}', '{{ $category->menu_cat_position }}', '{{ $category->menu_cat_status }}')">Edit</a>
-                                                <a href="" class="btn btn-danger" id=""
-                                                    onclick="ComfirmMenuCategoryDelete('{{ $category->id }}', '{{ $category->menu_cat_title }}')">Delete</a>
+                                                <a href="#" class="btn text-warning" id=""
+                                                    onclick="ShowEditMenuCategoryForm('{{ $category->id }}', '{{ $category->menu_cat_title }}', '{{ $category->menu_id }}', '{{ $category->menu_cat_position }}', '{{ $category->menu_cat_status }}')"><i class="pg-icon">edit</i></a>
+                                                <a href="" class="btn text-danger" id=""
+                                                    onclick="ComfirmMenuCategoryDelete('{{ $category->id }}', '{{ $category->menu_cat_title }}')"><i class="pg-icon">trash</i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -215,116 +215,68 @@
             });
              // show  Edit Form: function for assigning edit values
             let ShowEditMenuCategoryForm = (categoryID, categoryTitle, menuItemID, categoryPosition, categoryStatus) => {
-                console.log(categoryID, categoryTitle, menuId, categoryPosition, categoryStatus);
-
+                // console.log(categoryID, categoryTitle, menuItemID, categoryPosition, categoryStatus);
+                let MenuList = JSON.stringify("{{$allMenuItem}}");
+                console.log(JSON.parse(MenuList));
                 let FormCategory = `
                 <form method="post" action="{{ route('menu.category.update') }}" role="form"  id = "edit-menu-category-form">
-                                            @csrf
-                                            <div id="feedback"></div>
-                                            <input type="hidden" value="${categoryID}" name="menu_category_id" />
-                                            <div class="row g-2">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group form-group-default required">
-                                                        <label>Menu</label>
-                                                        <select class="form-control" id="menu_item_for_category"
-                                                            name="menu_item">
-                                                            <option selected disabled>Choose a menu</option>
-                                                            @foreach ($allMenuItem as $menu)
-                                                                    <option value="{{ $menu->id }}" 
-                                                                        ${(menu->id == menuItemID )? 'selected' : 'disabled' }}>
-                                                                        ${menu->menu_title }
-                                                                    </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                    @csrf
+                    <div id="feedback"></div>
+                    <input type="hidden" value="${categoryID}" name="menu_category_id" />
+                    <div class="row g-2">
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                <label>Menu</label>
+                                <select class="form-control" id="menu_item_for_category"
+                                    name="menu_item">
+                                    <option selected disabled>Choose a menu</option>`+
 
-                                                <div class="col-sm-12">
-                                                    <div class="form-group form-group-default required">
-                                                        <label>Category Title</label>
-                                                        <input name="menu_category_title"
-                                                            value="${categoryTitle}" type="text" 
-                                                            class="form-control" placeholder="Name of the category"
-                                                            id="category-title-field"
-                                                            >
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Position</label>
-                                                        <input type="number" name="menu_category_position"
-                                                            min="0" step="1"
-                                                            value="${categoryPosition}"
-                                                            class="form-control" placeholder="Position"
-                                                            id="category-level-field"
-                                                            >
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label for="" class="select-label">Status</label>
-                                                        <select name="menu_category_status" id="category-status-field"
-                                                            class="form-control">
-                                                            <option value="1" ${(categoryStatus == 1)?"selected":""}>Active</option>
-                                                            <option value="0" ${(categoryStatus == 0)?"selected":""}>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div>
-                                                <button aria-label="" type="button" class="btn btn-primary btn-cons" id="save-menu-category-btn">Save</button>
-                                            </div>
-                                        </form> `;
+                                    +`
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                <label>Category Title</label>
+                                <input name="menu_category_title"
+                                    value="${categoryTitle}" type="text" 
+                                    class="form-control" placeholder="Name of the category"
+                                    id="category-title-field"
+                                    >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default">
+                                <label>Position</label>
+                                <input type="number" name="menu_category_position"
+                                    min="0" step="1"
+                                    value="${categoryPosition}"
+                                    class="form-control" placeholder="Position"
+                                    id="category-level-field"
+                                    >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default">
+                                <label for="" class="select-label">Status</label>
+                                <select name="menu_category_status" id="category-status-field"
+                                    class="form-control">
+                                    <option value="1" ${(categoryStatus == 1)?"selected":""}>Active</option>
+                                    <option value="0" ${(categoryStatus == 0)?"selected":""}>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button aria-label="" type="button" class="btn btn-primary btn-cons" id="save-menu-category-btn">Save</button>
+                    </div>
+                </form> `;
                                         
                 $('#display-menu-category-edit').show(1000)
                 $('#display-menu-category-edit').empty()
                 $('#display-menu-category-edit').append(FormCategory)
 
-               /** $('#save-menu-category-btn').on('click', () => {
-                    // alert("hello")
-                    //Pass form data to route with method.
-                    let url = $('form#edit-menu-category-form').attr('action')
-                    let method = $('form#edit-menu-category-form').attr('method')
-                    let FormData = $('form#edit-menu-category-form').serialize();
-                    console.log(url, method, FormData);
-
-                    //Bringing feedback messages in ajax to avaoid page reload.
-                    $.ajax({
-                        url: url,
-                        type: method,
-                        data: FormData,
-                        success: (resp) => {
-                            console.log(resp);
-                            if (resp.status == 200) {
-                                $('#feedback').empty();
-                                $('#feedback').append(`
-                                <div class="alert alert-success" alert>
-                                    <h4 class="text-success">Success!</h4>
-                                    <p>${resp.message}</p>
-                                </div>
-                                `);
-                            }
-
-                            if (resp.status == 422) {
-                                $('#feedback').empty();
-                                $('#feedback').append(
-                                    `<div class="alert alert-error" alert><h4 class="text-danger">Error!</h4><ul id= 'error'></ul></div>`
-                                );
-                                $.each(resp.error, function(i, v) {
-                                    console.log(v);
-                                    $('#error').append(`
-                                                <li>${v}</li>
-                                       `);
-                                });
-                            }
-                        }
-                    });
-
-                });*/
-
+  
             }
 
             let ComfirmMenuCategoryDelete = (categoryId, categoryTitle) => {
