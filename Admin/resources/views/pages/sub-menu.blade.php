@@ -266,7 +266,14 @@
                 <!-- START card -->
                 <div class="card card-transparent">
                     <div class="card-header ">
-                        <div class="card-title">Table with Dynamic Rows </div>
+                        <div class="card-title">Available Sub Menus
+                        </div>
+                        <div class="pull-right">
+                            <div class="col-xs-12">
+                                <input type="text" name="search-sub_menu"  value="" class="form-control" placeholder="serch by sub menu">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover demo-table-dynamic table-responsive-block"
@@ -360,7 +367,7 @@
                                         <div class="btn-group">
                                             <a class="btn text-info" href="${v.id}"><i class="pg-icon">eye</i></a>
                                             <a class="btn text-warning" href="#" onclick = 'repopulate_category("${v.id}", "${v.menu_id}", "${v.menu_cat_title}", "${v.menu_cat_position}", "${v.menu_cat_status}")'><i class="pg-icon">pencil</i></a>
-                                            <a class="btn text-danger" href="${v.id}"><i class="pg-icon">trash</i></a>
+                                            <a class="btn text-danger" href="${v.id}" onclick='ComfirmMenuCategoryDelete("${v.id}", "${v.menu_cat_title}")'><i class="pg-icon">trash</i></a>
                                         </div>
                                     </td>
                                     </tr>`
@@ -495,6 +502,20 @@
                         element.selected = true
                     }
                 }
+
+
+            }
+
+            let ComfirmMenuCategoryDelete = (categoryId, categoryTitle) => {
+                console.log(categoryId, categoryTitle);
+                let answer = confirm("Delete this menu category? " + categoryTitle);
+                if(answer == true){
+                    var route ="{{ route('menu.category.delete', ':categoryId') }}";
+                    route = route.replace(':categoryId',categoryId);
+                    window.location.href = route;
+                   
+                }
+                
             }
         </script>
         @include('shared.custom-notify')

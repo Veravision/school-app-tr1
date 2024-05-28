@@ -146,7 +146,7 @@
                     <!-- START card -->
                     <div class="card card-transparent">
                         <div class="card-header ">
-                            <div class="card-title">Available Menu
+                            <div class="card-title">Available Menus
                             </div>
                             <div class="pull-right">
                                 <div class="col-xs-12">
@@ -252,7 +252,7 @@
                     });
 
                     // Add event listener for opening and closing details
-                    $('#detailedTable tbody').on('click', 'tr', function() {
+                    $('#detailedTable tbody').on('click', 'td:first-child', function() {
                         //var row = $(this).parent()
                         if ($(this).hasClass('shown') && $(this).next().hasClass('row-details')) {
                             $(this).removeClass('shown');
@@ -263,7 +263,7 @@
                         var row = table.DataTable().row(tr);
 
                         $(this).parents('tbody').find('.shown').removeClass('shown');
-                        $(this).parents('tbody').find('.row-details').remove();
+                        $('#detailedTable tbody tr').parents('tbody').find('.row-details').remove();
 
                         row.child(_format(row.data())).show();
                         tr.addClass('shown');
@@ -275,13 +275,7 @@
             })(window.jQuery);
         </script>
         <script>
-            // show  Menu Edit Form
-            // document.getElementById('editForm').addEventListener('click', function(event) {
-            //     document.getElementById('hideImg').style.display="none";
-            //     document.getElementById('showForm').style.display="block";
-            //     event.preventDefault()
-            // })
-
+            
             // function for assigning edit values
             $(document).ready(() => {
                 $('#display-menu-edit').hide();

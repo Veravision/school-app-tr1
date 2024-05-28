@@ -61,8 +61,8 @@ class MenuItemController extends Controller
     {
         //
         $id=decrypt($id);
-        $fetchMenuItem=MenuItem::where("id",$id)->first();///////////////////////////
-        $fetchMenu = MenuItem::orderBy('menu_position')->get();/////////////////////
+        $fetchMenuItem=MenuItem::where("id",$id)->where('is_delete','0')->first();///////////////////////////
+        $fetchMenu = MenuItem::where('is_delete','0')->orderBy('menu_position')->get();/////////////////////
 
         return view('pages.sub-menu')->with(["menuItem"=>$fetchMenuItem, "allMenu"=>$fetchMenu]);
     }

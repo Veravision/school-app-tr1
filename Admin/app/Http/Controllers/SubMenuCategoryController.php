@@ -26,7 +26,7 @@ class SubMenuCategoryController extends Controller
     public function create()
     {
         //
-        $fetchMenu = MenuItem::orderBy('menu_position')->get();
+        $fetchMenu = MenuItem::where('is_delete','0')->orderBy('menu_position')->get();
         $fetchAllSubMenu = SubMenu::orderBy('sub_menu_position')->get();
         return view('pages.sub-menu')->with(["allMenu"=>$fetchMenu, "allSubMenu"=>$fetchAllSubMenu]);
     }
@@ -35,7 +35,7 @@ class SubMenuCategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function get_category(Request $request) {
-        $fetchAllMenuCategory = MenuCategory::where('menu_id', $request->menu_id)->get();
+        $fetchAllMenuCategory = MenuCategory::where('menu_id', $request->menu_id)->where('is_delete','0')->get();
         return response()->json([
             'status' => 200,
             'success' => 'Record fetched successfully',
@@ -45,6 +45,7 @@ class SubMenuCategoryController extends Controller
     public function get_category_2(Request $request) {
         $fetchAllMenuCategory = MenuCategory::where('menu_id', $request->menu_id)
                                             ->where('menu_cat_status','1')
+                                            ->where('is_delete','0')
                                             ->orderBy('menu_cat_position')
                                             ->get();
         return response()->json([
