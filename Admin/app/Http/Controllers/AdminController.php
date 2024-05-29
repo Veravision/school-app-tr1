@@ -13,6 +13,7 @@ class AdminController extends Controller
         $this->middleware("guest:admin")->except("logout");
         $this->guard = $guard;
     }
+
     function DisplayLoginForm() {
         if (Auth::guard('admin')->user()) {
             # code...
@@ -22,4 +23,15 @@ class AdminController extends Controller
             return view('admin.auth.login');
         }
     }
+    
+    function DisplayRegisterForm() {
+        if (Auth::guard('admin')->user()) {
+            # code...
+            return redirect()->route('admin.dashboard');
+        }else {
+            # code...
+            return view('admin.auth.register');
+        }
+    }
+
 }
