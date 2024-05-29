@@ -19,7 +19,7 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard');
         }else {
             # code...
-            return view('auth.login');
+            return view('admin.auth.login');
         }
     }
 }
