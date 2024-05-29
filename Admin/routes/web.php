@@ -54,3 +54,6 @@ Route::middleware([
         Route::post('sub-menu-store', 'store')->name('sub.menu.store');
     });
 });
+
+// add route
+require "admin.php";
