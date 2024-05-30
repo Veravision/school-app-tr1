@@ -8,6 +8,7 @@ Route::prefix('admin')->group(function(){
         return redirect()->route('admin.login');
     });
     Route::get('/register', [AdminController::class, 'DisplayRegisterForm'])->name('admin.register');
+    Route::post('/register', [AdminController::class, 'CreateNewAdmin'])->name('admin.register');
 });
 
 Route::middleware([
