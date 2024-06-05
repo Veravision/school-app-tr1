@@ -18,12 +18,14 @@ use App\Actions\Fortify\PasswordValidationRules;
 
 class AdminController extends Controller
 {
-    function __construct(StatefulGuard $guard){
+    protected $guard;
+
+    public function __construct(StatefulGuard $guard){
         $this->middleware("guest:admin")->except("logout");
         $this->guard = $guard;
     }
 
-    function DisplayLoginForm() {
+    public function DisplayLoginForm() {
         if (Auth::guard('admin')->user()) {
             # code...
             return redirect()->route('admin.dashboard');
@@ -33,7 +35,7 @@ class AdminController extends Controller
         }
     }
     
-    function DisplayRegisterForm() {
+    public function DisplayRegisterForm() {
         if (Auth::guard('admin')->user()) {
             # code...
             return redirect()->route('admin.dashboard');
@@ -43,7 +45,7 @@ class AdminController extends Controller
         }
     }
 
-    function CreateNewAdmin(Request $request){
+    public function CreateNewAdmin(Request $request){
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
@@ -73,7 +75,7 @@ class AdminController extends Controller
         }
     }
 
-    function AdminLoginProcess(Request $request) : RedirectResponse {
+    public function AdminLoginProcess(Request $request) {
         Validator::make($request->all(), [
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', Password::min(8)->mixedCase(8)->numbers()->symbols()->uncompromised()],
@@ -81,7 +83,8 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             # code...
-            $request->session()->regenerateToken();
+            $request->session()->regenerate();
+            // return "user logged in";
             return redirect()->intended(route('admin.dashboard', ['guard' => 'admin']));
         }else {
             # code...

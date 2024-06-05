@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::middleware([
-    'auth:user',
+    'auth:web',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {

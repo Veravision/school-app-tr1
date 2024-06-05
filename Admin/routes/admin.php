@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 
 Route::prefix('admin')->group(function(){
@@ -18,6 +17,6 @@ Route::middleware([
     'verified'
 ])->prefix("admin")->group(function() {
     Route::get('/dashboard', function () {
-            return view('admin/dashboard');
+            return "Welcome Admin";
     })->name('admin.dashboard');
 });
