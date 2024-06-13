@@ -28,9 +28,10 @@ class SubMenuCategoryController extends Controller
         //
         $fetchMenu = MenuItem::where('is_delete','0')->orderBy('menu_position')->get();
         $fetchAllSubMenu = SubMenu::Join('menu_items', 'menu_items.id','=','sub_menus.menu_id')
-        ->leftJoin('menu_categories', 'menu_categories.id', '=', 'sub_menus.menu_category_id')
-        ->orderBy('sub_menu_position')
-        ->select('*', 'sub_menus.id as sub_menus_id', 'menu_items.id as menu_id', 'menu_categories.id as menu_category_id', 'sub_menus.created_at as sub_menu_created_at', 'sub_menus.updated_at as sub_menu_updated_at')->get();
+                                    ->leftJoin('menu_categories', 'menu_categories.id', '=', 'sub_menus.menu_category_id')
+                                    ->orderBy('sub_menu_position')
+                                    ->select('*', 'sub_menus.id as sub_menus_id', 'menu_items.id as menu_id', 'menu_categories.id as menu_category_id', 'sub_menus.created_at as sub_menu_created_at', 'sub_menus.updated_at as sub_menu_updated_at')
+                                    ->get();
         // dd($fetchAllSubMenu);
         return view('pages.sub-menu')->with(["allMenu"=>$fetchMenu, "allSubMenu"=>$fetchAllSubMenu]);
     }

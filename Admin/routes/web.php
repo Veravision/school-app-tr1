@@ -5,6 +5,9 @@ use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\SubMenuCategoryController;
 use App\Http\Controllers\CompanyRegistrationController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,5 +55,16 @@ Route::middleware([
         Route::post('get-category', 'get_category')->name('fetch.category');
         Route::post('get-category_submenu', 'get_category_2')->name('fetch.category.submenu');
         Route::post('sub-menu-store', 'store')->name('sub.menu.store');
+    });
+    Route::controller(TagController::class)->group(function(){
+        Route::get('blog-post-tag', 'create')->name('post.tag');
+        Route::post('tag-store', 'store')->name('post.tag.store');
+    });
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('blog-post-category', 'create')->name('post.category');
+        Route::post('category-store', 'store')->name('post.category.store');
+    });
+    Route::controller(PostController::class)->group(function(){
+        Route::get('blog-post', 'create')->name('post');
     });
 });

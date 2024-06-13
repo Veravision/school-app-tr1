@@ -99,8 +99,8 @@
                     <div class="inner">
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Menu Records</li>
+                            <li class="breadcrumb-item"><a href="#">Menu</a></li>
+                            <li class="breadcrumb-item active">Menu Items</li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">

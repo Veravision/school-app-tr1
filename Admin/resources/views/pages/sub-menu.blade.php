@@ -19,7 +19,7 @@
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Menu</a></li>
-                            <li class="breadcrumb-item active">Setup</li>
+                            <li class="breadcrumb-item active">Sub Menu</li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">
@@ -146,12 +146,12 @@
                 <div class="jumbotron">
                     <div class="container-fluid">
                         <div class="inner">
-                            <div class="col-lg-8">
+                            <div class="col-lg-6">
                                 <div class="row">
                                     <div class="fullheight">
                                         <div class="card">
                                             <div class="card-body">
-                                                <p class="small-text">Create a new <b>sub menu</b> using this form, make
+                                                <p class="small-text"><b>Create a new sub menu</b> using this form, make
                                                     sure
                                                     you fill them all</p>
 
@@ -333,8 +333,6 @@
         <script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/datatables.responsive.js') }}">
         </script>
         <script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
-        <!-- END VENDOR JS -->
-        <!-- BEGIN PAGE LEVEL JS -->
         <script src="{{ asset('assets/js/datatables.js') }}" type="text/javascript"></script>
         <!-- END PAGE LEVEL JS -->
 
