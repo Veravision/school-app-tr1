@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::middleware([
-    'auth:sanctum',
+    'auth:web',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
@@ -68,3 +68,6 @@ Route::middleware([
         Route::get('blog-post', 'create')->name('post');
     });
 });
+
+// add route
+require "admin.php";
