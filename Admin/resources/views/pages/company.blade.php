@@ -99,9 +99,8 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="phone_number_code"
-                                                value="{{ empty(old('phone_number_code')) ? $phone_number_code : old('phone_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
-                                                id="basic-addon1">
+                                                id="phone-number-code">
 
                                             </select>
                                             <input type="text" class="form-control ph-number" name="phone_number"
@@ -258,9 +257,8 @@
                                         {{-- <input type="tel" class="form-control" name="phone_number" value="{{old('phone_number')}}" required> --}}
                                         <div class="input-group mb-3">
                                             <select name="owner_phone_number_code"
-                                                value="{{ empty(old('owner_phone_number_code')) ? $owner_phone_number_code : old('owner_phone_number_code') }}"
                                                 style="appearance: none;" class="input-group-text phone-code"
-                                                id="basic-addon1">
+                                                id="owner-phone-num-code">
 
                                             </select>
                                             <input type="text" class="form-control ph-number"
@@ -351,11 +349,38 @@
                     }else{
                         element.innerHTML += `<option value="${v.name}" >${v.name}</option>`
                     }
-                    
-                    
                 });
             }
             })
+
+            let owner_phone_number_code = "{{$owner_phone_number_code}}";
+            console.log(owner_phone_number_code);
+            if (owner_phone_number_code != "") {
+                let owner_phone_num_code = document.querySelector('#owner-phone-num-code')
+                for (let index = 0; index < owner_phone_num_code.length; index++) {
+                let element = owner_phone_num_code[index];
+                element.selected = false
+                console.log(element.value, owner_phone_number_code);
+                if(element.value == owner_phone_number_code){
+                    element.selected = true
+                }
+            }
+            }
+
+            let phone_number_code = "{{$phone_number_code}}";
+            if (phone_num_code != "") {
+                console.log(phone_number_code);
+                let phone_num_code = document.querySelector('#phone-number-code')
+            
+                for (let index = 0; index < phone_num_code.length; index++) {
+                let element = phone_num_code[index];
+                element.selected = false
+                console.log(element.value, phone_number_code);
+                if(element.value == phone_number_code){
+                    element.selected = true
+                }
+            }
+            }
         </script>
     @endsection
 </x-app-layout>

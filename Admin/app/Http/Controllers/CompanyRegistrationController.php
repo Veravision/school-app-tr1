@@ -30,15 +30,16 @@ class CompanyRegistrationController extends Controller
         $officeNumberCollection = Str::of($fetchCompany->office_number)->explode('_');
         $whatsappNumberCollection = Str::of($fetchCompany->whatsapp_number)->explode('_');
         $ownerPhoneNumberCollection = Str::of($fetchCompany->owner_phone_number)->explode('_');
+        // dd($ownerPhoneNumberCollection);
         return view('pages.company')->with(['companyRecord'=>$fetchCompany,
-                                            'phone_number_code'=>$phoneNumberCollection[0],
-                                            'phone_number'=>$phoneNumberCollection[1],
-                                            'office_number_code'=>$officeNumberCollection[0],
-                                            'office_number'=>$officeNumberCollection[1],
-                                            'whatsapp_number_code'=> $whatsappNumberCollection[0],
-                                            'whatsapp_number'=> $whatsappNumberCollection[1],
-                                            'owner_phone_number_code'=>$ownerPhoneNumberCollection[0],
-                                            'owner_phone_number'=>$ownerPhoneNumberCollection[1],
+        'phone_number_code'=>($fetchCompany->phone_number=="")?"":$phoneNumberCollection[0],
+        'phone_number'=>($fetchCompany->phone_number=="")?"":$phoneNumberCollection[1],  
+        'office_number_code'=>($fetchCompany->office_number=="")?"":$officeNumberCollection[0],
+        'office_number'=>($fetchCompany->office_number=="")?"":$officeNumberCollection[1],
+        'whatsapp_number_code'=>($fetchCompany->whatsapp_number=="")?"": $whatsappNumberCollection[0],
+        'whatsapp_number'=>($fetchCompany->whatsapp_number=="")?"": $whatsappNumberCollection[1],
+        'owner_phone_number_code'=>($fetchCompany->owner_phone_number=="")?"":$ownerPhoneNumberCollection[0],
+        'owner_phone_number'=>($fetchCompany->owner_phone_number=="")?"":$ownerPhoneNumberCollection[1],
                                            ]);
     }
 

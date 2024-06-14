@@ -20,7 +20,7 @@
 {{-- info message --}}
 @if(Session::has('info'))
 <div class="alert alert-info" alert>
-    <h4 class="text-info">Success!</h4>
+    <h4 class="text-info">Infomation!</h4>
     <p>{{ Session::get('info') }}</p>
 </div>
 @endif

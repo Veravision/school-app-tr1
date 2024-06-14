@@ -95,8 +95,8 @@
                     <div class="inner">
                         <!-- START BREADCRUMB -->
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Menu Category Records</li>
+                            <li class="breadcrumb-item"><a href="#">Menu</a></li>
+                            <li class="breadcrumb-item active">Menu Category </li>
                         </ol>
                         <!-- END BREADCRUMB -->
                         <div class="row">
@@ -134,7 +134,79 @@
             </div>
             <!-- END JUMBOTRON -->
             {{-- Show Edit Form --}}
-            <div class="container-fluid" id="display-menu-category-edit"></div>
+            <div class="container-fluid" id="display-menu-category-edit-form">
+                <div class="col-lg-6 my-2 bg-white">
+                    <div class="card card-transparent">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="card-title"><b>Edit Menu Category</b></div>
+                            <a class="btn btn-link text-danger px-1 pt-0" style="border-radius: 0px; cursor: pointer;" onclick="$('#display-menu-category-edit-form').hide();">x</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{ route('menu.category.update') }}"
+                        role="form" id = "">
+                        @csrf
+                        <div id="feedback"></div>
+                        <input type="hidden" value="{{old('')}}"
+                            name="menu_category_id" />
+                        <div class="row g-2">
+                            <div class="col-sm-12">
+                                <div class="form-group form-group-default required">
+                                    <label>Menu</label>
+                                    <select class="form-control" id="input30" name="menu_item">
+                                        <option selected>Choose a menu</option>
+                                        @foreach ($allMenuItem as $menu)
+                                            <option value="{{ $menu->id }}">
+                                                {{ $menu->menu_title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-group-default required">
+                                    <label>Category Title</label>
+                                    <input name="menu_category_title"
+                                        value="" type="text"
+                                        class="form-control"
+                                        placeholder="Name of the category"
+                                        id="category-title-field">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-default">
+                                    <label>Position</label>
+                                    <input type="number"
+                                        name="menu_category_position" min="0"
+                                        step="1" value=""
+                                        class="form-control" placeholder="Position"
+                                        id="category-position-field">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-default">
+                                    <label for=""
+                                        class="select-label">Status</label>
+                                    <select name="menu_category_status"
+                                        id="category-status-field"
+                                        class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button aria-label="" type="button"
+                                class="btn btn-primary btn-cons"
+                                id="save-menu-category-btn">Save</button>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+
             {{-- End Show Edit Form --}}
             <!-- START CONTAINER FLUID -->
             <div class=" container-fluid   container-fixed-lg">
@@ -162,7 +234,7 @@
                                     <th>Menu</th>
                                     <th>Position</th>
                                     <th>Status</th>
-                                    <th style="width:20%">Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -211,72 +283,12 @@
         <script>
             
              $(document).ready(() => {
-                $('#display-menu-category-edit').hide()
+                $('#display-menu-category-edit-form').hide()
             });
              // show  Edit Form: function for assigning edit values
             let ShowEditMenuCategoryForm = (categoryID, categoryTitle, menuItemID, categoryPosition, categoryStatus) => {
-                // console.log(categoryID, categoryTitle, menuItemID, categoryPosition, categoryStatus);
-                let MenuList = JSON.stringify("{{$allMenuItem}}");
-                console.log(JSON.parse(MenuList));
-                let FormCategory = `
-                <form method="post" action="{{ route('menu.category.update') }}" role="form"  id = "edit-menu-category-form">
-                    @csrf
-                    <div id="feedback"></div>
-                    <input type="hidden" value="${categoryID}" name="menu_category_id" />
-                    <div class="row g-2">
-                        <div class="col-sm-12">
-                            <div class="form-group form-group-default required">
-                                <label>Menu</label>
-                                <select class="form-control" id="menu_item_for_category"
-                                    name="menu_item">
-                                    <option selected disabled>Choose a menu</option>`+
-
-                                    +`
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group form-group-default required">
-                                <label>Category Title</label>
-                                <input name="menu_category_title"
-                                    value="${categoryTitle}" type="text" 
-                                    class="form-control" placeholder="Name of the category"
-                                    id="category-title-field"
-                                    >
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group form-group-default">
-                                <label>Position</label>
-                                <input type="number" name="menu_category_position"
-                                    min="0" step="1"
-                                    value="${categoryPosition}"
-                                    class="form-control" placeholder="Position"
-                                    id="category-level-field"
-                                    >
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group form-group-default">
-                                <label for="" class="select-label">Status</label>
-                                <select name="menu_category_status" id="category-status-field"
-                                    class="form-control">
-                                    <option value="1" ${(categoryStatus == 1)?"selected":""}>Active</option>
-                                    <option value="0" ${(categoryStatus == 0)?"selected":""}>Inactive</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <button aria-label="" type="button" class="btn btn-primary btn-cons" id="save-menu-category-btn">Save</button>
-                    </div>
-                </form> `;
-                                        
-                $('#display-menu-category-edit').show(1000)
-                $('#display-menu-category-edit').empty()
-                $('#display-menu-category-edit').append(FormCategory)
-
-  
+                // console.log(categoryID, categoryTitle, menuItemID, categoryPosition, categoryStatus);           
+                $('#display-menu-category-edit-form').show(1000)
             }
 
             let ComfirmMenuCategoryDelete = (categoryId, categoryTitle) => {
