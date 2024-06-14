@@ -6,17 +6,17 @@ Route::prefix('admin')->group(function(){
     Route::get('/', function(){
         return redirect()->route('admin.login');
     });
-    Route::post('/login', [AdminController::class, 'AdminLoginProcess'])->name('admin.login');
+    Route::post('/login', [AdminController::class, 'ProcessLogin'])->name('admin.login');
     Route::get('/register', [AdminController::class, 'DisplayRegisterForm'])->name('admin.register');
     Route::post('/register', [AdminController::class, 'CreateNewAdmin'])->name('admin.register');
 });
 
 Route::middleware([
-    'auth',
-    config('jetstream.auth_session'),
-    'verified'
-])->prefix("admin")->group(function() {
+    'auth:admin',
+    // config('auth_session'),
+    // 'verified'
+])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-            return "Welcome Admin";
+        return view('admin.dashboard');
     })->name('admin.dashboard');
 });

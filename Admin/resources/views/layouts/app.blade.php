@@ -736,7 +736,7 @@
           <!-- START User Info-->
 
           <div class="dropdown pull-right d-lg-block d-none">
-          @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+          @if (Auth::guard('web')->check() && Laravel\Jetstream\Jetstream::managesProfilePhotos())
           <button class="profile-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="profile dropdown">
               <span class="thumbnail-wrapper d32 circular inline">
       					<img src="{{ Auth::user()->profile_photo_url }}" alt="" data-src="{{ Auth::user()->profile_photo_url }}"
@@ -745,8 +745,9 @@
             </button>
             @else
             <span class="inline-flex rounded-md">
-                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                    {{ Auth::user()->name }}
+                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">  
+                  
+                  
                     <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
@@ -755,7 +756,7 @@
             @endif
 
             <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-              <a href="#" class="dropdown-item"><span>Signed in as <br /><b>{{Auth::user()->name}}</b></span></a>
+              <a href="#" class="dropdown-item"><span>Signed in as <br /><b>//</b></span></a>
               <div class="dropdown-divider"></div>
               <a href="{{ route('profile.show') }}" class="dropdown-item">Your Profile</a>
               <a href="#" class="dropdown-item">Your Activity</a>
@@ -772,7 +773,7 @@
              </x-dropdown-link>
             </form>
               <div class="dropdown-divider"></div>
-              <span class="dropdown-item fs-12 hint-text">Last edited by {{Auth::user()->name}}<br />on Friday at 5:27PM</span>
+              <span class="dropdown-item fs-12 hint-text">Last edited by <br />on Friday at 5:27PM</span>
             </div>
           </div>
           <!-- END User Info-->

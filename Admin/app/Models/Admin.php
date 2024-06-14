@@ -23,6 +23,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'admin_id';
     protected $fillable = [
         'name',
         'email',
