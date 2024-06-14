@@ -63,20 +63,23 @@ class AdminController extends Controller
         ], $request->remember)) {
             # code...
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard', ['admin' => 'admin']));
-        }elseif (Auth::guard('admin')->attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-        ], $request->remember)) {
-            # code...
-            $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard', ['admin' => 'admin']));
-        }
-        else {
+            return redirect()->intended(route('admin.dashboard', ['guard' => 'admin']));
+        }else {
             # code...
             return back()->withErrors(['Credentials do not match.'])->onlyInput('email', 'remember');
         }
         return back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function logout(Request $request)
+    {
+        # code...
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        return redirect()->route('admin.login');
+        $request->session()->regenerateToken();
+
+        return app(LogoutResponse::class);
     }
     /**
      * Display a listing of the resource.

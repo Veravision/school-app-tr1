@@ -9,11 +9,12 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', [AdminController::class, 'ProcessLogin'])->name('admin.login');
     Route::get('/register', [AdminController::class, 'DisplayRegisterForm'])->name('admin.register');
     Route::post('/register', [AdminController::class, 'CreateNewAdmin'])->name('admin.register');
+    Route::post('/student-logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
 
 Route::middleware([
     'auth:admin',
-    // config('auth_session'),
+    // config('jetstream.auth_session'),
     // 'verified'
 ])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
