@@ -79,7 +79,7 @@
             <!-- BEGIN SIDEBAR MENU ITEMS-->
             <ul class="menu-items">
                 <li class="m-t-20">
-                    <a href="index.html" class="detailed">
+                    <a href="{{route('admin.dashboard')}}" class="detailed">
                         <span class="title">Dashboard</span>
                         <span class="details">12 New Updates</span>
                     </a>
