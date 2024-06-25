@@ -20,6 +20,11 @@ use Auth;
 use Validator;
 
 use App\Models\Admins;
+use Illuminate\Validation\Rules\Password;
+use Laravel\Jetstream\Jetstream;
+
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -44,6 +49,37 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard');
         } else {
             return view('admin.auth.login');
+        }
+    }
+
+    public function DisplayRegisterForm() {
+        if (Auth::guard('admin')->user()) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return view('admin.auth.register');
+        }
+    }
+
+    function CreateNewAdmin(Request $request) {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'password' => ['required', Password::min(8)->mixedCase(8)->numbers()->symbols()->uncompromised(), 'confirmed'],
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ]);
+
+        $admin = Admin::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+        if($admin){
+            $request->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard', ['guard' => 'admin']));
+        }else {
+            # code...
+            return back()->withInput($request->only('email', 'remember'))->withErrors(['New user could not be registered...']);
         }
     }
 
