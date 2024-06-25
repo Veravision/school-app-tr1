@@ -11,8 +11,6 @@ class Tag extends Model
     protected $fillable = [
         'title',
         'meta_title',
-        'slug',
-        'content',
         'status',
     ];
 }

@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -26,7 +27,8 @@ class PostController extends Controller
     $fetchCategories = Category::all()->where('status',1); //active and not deleted NB: add is_delete column
     $fetchTags = Tag::all()->where('status',1); //active and not deleted NB:add is_delete column
     $fetchPosts = Post::all()->where('is_delete',0); //all posts but not deleted 
-        return view('pages.blog.post')->with(['allCategories'=>$fetchCategories,'allTags'=>$fetchTags,'allPosts'=>$fetchPosts]);
+    $fetchUsers = User::all(); 
+        return view('pages.blog.post')->with(['allCategories'=>$fetchCategories,'allTags'=>$fetchTags,'allPosts'=>$fetchPosts,'allUsers'=>$fetchUsers]);
     }
 
     /**

@@ -1,3 +1,5 @@
+ @section('createpoststyles')
+ @endsection
  <!-- START card -->
  <div class="card card-transparent">
      <div class="card-body">
@@ -34,28 +36,29 @@
                                              <li class="nav-item">
                                                  <a class="d-flex align-items-center" data-bs-toggle="tab"
                                                      href="#tab2" data-bs-target="#tab2" role="tab"><i
-                                                         class="material-icons fs-14 tab-icon">category</i>
-                                                     <span>Add Categories</span></a>
+                                                         class="material-icons fs-14 tab-icon">settings</i>
+                                                     <span>Advanced Option</span></a>
                                              </li>
                                              <li class="nav-item">
                                                  <a class="d-flex align-items-center" data-bs-toggle="tab"
                                                      href="#tab3" data-bs-target="#tab3" role="tab"><i
-                                                         class="material-icons fs-14 tab-icon">sell</i>
-                                                     <span>Add Tags</span></a>
+                                                     class="material-icons fs-14 tab-icon">query_stats</i>
+                                                     <span>SEO</span></a>
                                              </li>
                                              <li class="nav-item">
                                                  <a class="d-flex align-items-center" data-bs-toggle="tab"
                                                      href="#tab4" data-bs-target="#tab4" role="tab"><i
-                                                         class="material-icons fs-14 tab-icon">done_all</i>
-                                                     <span>Summary</span></a>
+                                                         class="material-icons fs-14 tab-icon">publish</i>
+                                                     <span>Publish</span></a>
                                              </li>
                                          </ul>
                                          <!-- Tab panes -->
                                          <form method="post" action="" id="form-personal" role="form"
-                                             autocomplete="off">
+                                             autocomplete="off" enctype="multipart/form-data">
                                              @csrf
                                              <div class="tab-content">
-                                                 <div class="tab-pane padding-20 sm-no-padding active" id="tab1">
+                                                 <div class="tab-pane padding-20 sm-no-padding active" 
+                                                     id="tab1">
                                                      {{-- begining of post content 1 --}}
                                                      <div class="row g-3">
                                                          <div class="col-md-8">
@@ -150,7 +153,7 @@
                                                                     <div class="card accordion-item bg-light">
                                                                         <div class="accordion-header">
                                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                                Category
+                                                                               Add Category
                                                                             </button>
 
                                                                           <div class="tools">
@@ -159,7 +162,7 @@
                                                                         <div class="card-body accordion-body" id="collapseOne">
                                                                             <div class="col">
                                                                             @forelse ($getAllCategories as $key => $category)
-                                                                              <div class="form-check complete">
+                                                                              <div class="complete mb-2">
                                                                                 <input type="checkbox" id="checkColorOpt1" name="category[]" value="{{ $category->id }}">
                                                                                 <label for="checkColorOpt1">
                                                                                     {{ $category->title }}
@@ -172,109 +175,194 @@
                                                                       </div>
                                                                       </div>
                                                                 </div>
-                                                                <div class="col-12">
-                                                                    <div class="card card-body card-default">
-                                                                        {{-- tag section --}}
-                                                                        <div class="">
-                                                                            <h5>
+                                                                <div class="col-12 accordion">
+                                                                    <div class="card accordion-item bg-light">
+                                                                        <div class="accordion-header">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Add Tags
-                                                                            </h5>
-                                                                            <select id="multi" class="full-width select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true" name="tags[]">
-                                                                            @foreach ($getAllTags as $key => $tag)
-                                                                              <option value="{{ $tag->id }}">{{ $tag->title }}</option>
-                                                                            @endforeach
-                                                                            </select>
-        
+                                                                            </button>
+
+                                                                          <div class="tools">
                                                                           </div>
-                                                                        {{-- tag section ends here --}}
-                                                                     </div>
+                                                                        </div>
+                                                                        <div class="card-body accordion-body" id="collapseTwo">
+                                                                            <div class="col">
+                                                                                <select id="multi" class="full-width select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true" name="tags[]">
+                                                                                    @foreach ($getAllTags as $key => $tag)
+                                                                                      <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                      </div>
+                                                                      </div>
                                                                 </div>
                                                             </div>
                                                          </div>
                                                      </div>
-                                                     {{-- end of post conten<div class="row g-3">
-                                                        <div class="col">
-                                                            <div class="card card-body">
-
-                                                            </div>
-                                                            <div class="card card-body"></div>
-                                                        </div>
-                                                    </div>t 1 --}}
+                                                     {{-- end of post conten --}}
                                                  </div>
-                                                 <div class="tab-pane padding-20 sm-no-padding" id="tab2">
-                                                     <div class="row row-same-height">
-                                                         <div class="col-7 m-t-5 mx-auto">
-                                                             <h6 class="text-secondary">Select
-                                                                 Categories:</h6>
-                                                             @foreach ($getAllCategories as $key => $category)
-                                                                 <div class="">
-                                                                     <input type="checkbox" name="category[]"
-                                                                         value="{{ $category->id }}"
-                                                                         class="form-check-input" id="">
-                                                                     <label for="" class="form-check-label">
-                                                                         <h5>{{ $category->title }}</h5>
-                                                                     </label>
-                                                                 </div>
-                                                             @endforeach
+                                                 <div class="tab-pane padding-20 sm-no-padding" 
+                                                     id="tab2">
+                                                     <div class="row row-same-height border">
+                                                         <div class="col-12 m-t-5 mx-auto">
+                                                            <div class="card card-border">
+                                                                <ul class="nav nav-tabs nav-tabs-simple justify-content-center" role="tablist" data-init-reponsive-tabs="dropdownfx">
+                                                                  <li class="nav-item">
+                                                                    <a class="active" data-bs-toggle="tab" role="tab" data-bs-target="#tabsettings" href="#">
+                                                                        <i class="material-icons fs-14 tab-icon">settings</i>Post Settings</a>
+                                                                  </li>
+                                                                  <li class="nav-item">
+                                                                    <a href="#" data-bs-toggle="tab" role="tab" data-bs-target="#tabsliderimage">
+                                                                        <i class="material-icons fs-14 tab-icon">tune</i>Post Slider Image</a>
+                                                                  </li>
+                                                                  <li class="nav-item">
+                                                                    <a class="disabled" href="#" data-bs-toggle="tab" role="tab" data-bs-target="#tabversionhistory">
+                                                                        <i class="material-icons fs-14 tab-icon">edit_square</i>Version History</a>
+                                                                  </li>
+                                                                </ul>
+                                                                <div class="tab-content">
+                                                                  <div class="tab-pane active" id="tabsettings">
+                                                                      <div class="col-lg-12">
+                                                                            <div class="text-center pt-4">
+                                                                                <p>
+                                                                                    <span class="semi-bold">POST TYPE</span>&nbsp;
+                                                                                    <select name="post_type" class="cs-select cs-skin-slide" data-init-plugin="cs-select" id="posttype" onchange="showSlider()">
+                                                                                        <option value="normal" {{ old('type') == 'normal' ? 'selected' : '' }}>Normal</option>
+                                                                                        <option value="image" {{ old('type') == 'image' ? 'selected' : '' }}>Image</option>
+                                                                                        <option value="video" {{ old('type') == 'video' ? 'selected' : '' }}>Video</option>
+                                                                                    </select>
+                                                                                </p>
+                                                                            </div>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="tab-pane" id="tabsliderimage">
+                                                                        <div class="col-md-12" id="normal" style="display: block">
+                                                                            <div class="text-center p-4">
+                                                                                <h7>NO SLIDER ATTACHMENT!</h7>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12" id="image" style="display: none">
+                                                                            <div class="text-center mb-4 p-4">
+                                                                                <fieldset class="row g-3">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">Select Image:</lable>
+                                                                                        <div class="filepond" style = "width: 18rem !important;" multiple></div>
+                                                                                                {{-- <input type="file" name="filepond" id=""> --}}
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12" id="video" style="display: none">
+                                                                            <div class="text-center mb-4 p-4">
+                                                                                <fieldset class="row g-3">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">Select Video:</lable>
+                                                                                            <video width="400" height="200" controls>
+                                                                                                <source src="" id="video_here">
+                                                                                                  Your browser does not support HTML5 video.
+                                                                                            </video>
+                                                                                              
+                                                                                            <input type="file" name="file" class="file_multi_video" accept="video/*">
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="tab-pane" id="tabversionhistory">
+                                                                    <div class="row">
+                                                                      <div class="col-lg-12">
+                                                                        <p>VERSION HISTORY HERE.</p>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
                                                          </div>
                                                      </div>
                                                  </div>
                                                  <div class="tab-pane slide-left padding-20 sm-no-padding"
                                                      id="tab3">
-                                                     <div class="row row-same-height">
-                                                         <div class="col-md-7 b-r b-dashed b-grey ">
-                                                             <div class="col-7 m-t-5 mx-auto">
-                                                                 <h6 class="text-secondary">Select Tags:
-                                                                 </h6>
-                                                                 
-                                                                     <div class="">
-                                                                         <input type="checkbox" name="tagArray[]"
-                                                                             value=""
-                                                                             class="form-check-input" id="">
-                                                                         <label for=""
-                                                                             class="form-check-label">
-                                                                             <h5>
-                                                                             </h5>
-                                                                         </label>
-                                                                     </div>
-                                                                 
-                                                             </div>
-                                                         </div>
-                                                         <div class="col-md-5">
-                                                             <div class="padding-30 sm-padding-5">
-                                                                 <!-- START card -->
-                                                                 <div class="card card-default">
-                                                                     <div class="card-header ">
-                                                                         <div class="card-title">Add Tag List</div>
-                                                                         <div class="tools"></div>
-                                                                     </div>
-                                                                     <div class="card-body">
-                                                                         <input class="tagsinput custom-tag-input"
-                                                                             type="text"
-                                                                             value="Amsterdam,Washington" />
-                                                                         <input class="tagsinput custom-tag-input"
-                                                                             type="text"
-                                                                             value="johnsmith@pages.io,janesmith@pages.io" />
-                                                                         <div
-                                                                             class="form-group form-group-default required ">
-                                                                             <label>Tags</label>
-                                                                             <input name="tag_list"
-                                                                                 class="tagsinput custom-tag-input"
-                                                                                 type="text"
-                                                                                 value="hello World, quotes, inspiration" />
-                                                                         </div>
-                                                                     </div>
-                                                                 </div>
-                                                                 <!-- END card -->
-                                                             </div>
-                                                         </div>
-                                                     </div>
+                                                    <div class="row row-same-height mt-5">
+                                                        <div class="col-7">
+                                                            <div class="form-group form-group-default">
+                                                                <label>Meta Title</label>
+                                                                <input name="meta_title" value="{{ old('meta_title') }}" type="text"
+                                                                    class="form-control" placeholder="">
+                                                            </div>
+                                                            <div class="form-group form-group-default required">
+                                                                <label>Slug</label>
+                                                                <input name="slug" value="{{ old('slug') }}" type="text"
+                                                                    class="form-control" placeholder="" required>
+                                                            </div>
+                                                            <div class="form-group form-group-default">
+                                                                    <label>Summary</label>
+                                                                    <textarea name="summary" class="form-control" placeholder="Summary description" rows="5"
+                                                                        style="resize: none"> {{ old('summary') }} </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                  </div>
                                                  <div class="tab-pane padding-20 sm-no-padding mx-auto"
                                                      id="tab4">
-                                                     <button aria-label="" type="submit"
+                                                    <div class="row row-same-height">
+                                                        <div class="col-md-4 b-r b-dashed b-primary ">
+                                                            <div class="row text-center pt-4">
+                                                                <div class="col-6">
+                                                                    <p>
+                                                                        <span class="semi-bold">Author</span>&nbsp;
+                                                                        <select name="author" class="cs-select cs-skin-slide" data-init-plugin="cs-select" id="author" onchange="showOtherUserAuthor()">
+                                                                            <option value="self" {{ old('author') == 'self' ? 'selected' : '' }}>Self</option>
+                                                                            <option value="others" {{ old('author') == 'others' ? 'selected' : '' }}>Others</option>
+                                                                        </select>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-6" id="otherUserAuthor" style="display: none">
+                                                                    <p>
+                                                                        <span class="semi-bold">Users</span>&nbsp;
+                                                                        <select name="other-user_author" class="cs-select cs-skin-slide" data-init-plugin="cs-select">
+                                                                            @foreach ($getAllUsers as $key => $user)
+                                                                                <option value="{{ $user->id }}">{{ $user->name }}</option>  
+                                                                                {{-- {{ old('other_user_author') == '{{ $user->id }}' ? 'selected' : '' }} --}}
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="row text-center pt-4">
+                                                                <div class="col-12">
+                                                                    <span class="semi-bold">Published</span>&nbsp;
+                                                                    <select name="published" class="cs-select cs-skin-slide" data-init-plugin="cs-select" id="published" onchange="showVisibilityPublishedDate()">
+                                                                        <option value="disable" {{ old('published') == 'disable' ? 'selected' : '' }}>Disable</option>
+                                                                        <option value="enable" {{ old('published') == 'enable' ? 'selected' : '' }}>Enable</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row pt-4">
+                                                                <div class="col-6 text-center" id="visibility" style="display: none">
+                                                                        <span class="semi-bold">Visibility</span>&nbsp;
+                                                                        <select name="visibility" class="cs-select cs-skin-slide" data-init-plugin="cs-select" id="visibility-input">
+                                                                            <option value="private" {{ old('visibility') == 'private' ? 'selected' : '' }}>Private</option>
+                                                                            <option value="public" {{ old('visibility') == 'public' ? 'selected' : '' }}>Public</option>
+                                                                        </select>
+                                                                </div>
+                                                                <div class="col-6 text-center" id="publishedDate" style="display: none">
+                                                                    <div class="form-group form-group-default input-group col-md-7">
+                                                                        <div class="form-input-group">
+                                                                          <input type="email" class="form-control" placeholder="Pick a date" id="datepicker-component2">
+                                                                        </div>
+                                                                        <div class="input-group-append ">
+                                                                          <span class="input-group-text"><i class="pg-icon">calendar</i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     {{-- <button aria-label="" type="submit"
                                                          class="btn btn-success btn-cons ronded">Save
-                                                         Post</button>
+                                                         Post</button> --}}
                                                  </div>
                                                  <div
                                                      class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
@@ -285,7 +373,7 @@
                                                                  type="button">
                                                                  <span>Next</span>
                                                                  <span class="hidden-block">
-                                                                     <i class="material-icons fs-16">category</i>
+                                                                     <i class="material-icons fs-16">settings</i>
                                                                  </span>
                                                              </button>
                                                          </li>
@@ -295,7 +383,7 @@
                                                                  type="button">
                                                                  <span>Finish</span>
                                                                  <span class="hidden-block">
-                                                                     <i class="material-icons fs-16">sell</i>
+                                                                     <i class="material-icons fs-16">query_stats</i>
                                                                  </span>
                                                              </button>
                                                          </li>
@@ -305,7 +393,7 @@
                                                                  type="button">
                                                                  <span>First</span>
                                                                  <span class="hidden-block">
-                                                                     <i class="material-icons fs-16">sell</i>
+                                                                     <i class="material-icons fs-16">query_stats</i>
                                                                  </span>
                                                              </button>
                                                          </li>
@@ -315,7 +403,7 @@
                                                                  type="button">
                                                                  <span>Previous</span>
                                                                  <span class="hidden-block">
-                                                                     <i class="material-icons fs-14">category</i>
+                                                                     <i class="material-icons fs-14">settings</i>
                                                                  </span>
                                                              </button>
                                                          </li>
@@ -335,3 +423,65 @@
      </div>
  </div>
  <!-- END card -->
+ @section('createpostscripts')
+    <script type="text/javascript">
+        // event listener to show post slider 
+        const postType = document.getElementById("posttype");
+        postType.addEventListener("change", showSlider);
+
+        //event listener to show other users as published author
+        const publishedBy = document.getElementById("author");
+        publishedBy.addEventListener("change", showOtherUserAuthor);
+
+        // event listener to show visibility and published date
+        const publish = document.getElementById("published");
+        publish.addEventListener("change", showVisibilityPublishedDate);
+
+       function showSlider(event) {
+           const currentValue = event.target.value;
+        //    console.log(currentValue);
+        //    alert(currentValue);
+           // document.getElementById('normal').style.display = "none";
+           //use tenary operator to determine what style to display for each element id selector
+           var id = currentValue;
+           (id == "normal") ? document.getElementById('normal').style.display = "block": document.getElementById(
+               'normal').style.display = "none";
+           (id == "image") ? document.getElementById('image').style.display = "block": document.getElementById(
+               'image').style.display = "none";
+           (id == "video") ? document.getElementById('video').style.display = "block": document.getElementById(
+               'video').style.display = "none";
+       }
+
+       function showOtherUserAuthor(event){
+           const currentValue = event.target.value;
+        //    console.log(currentValue);
+        //    alert(currentValue);
+           var author = currentValue;
+           (author == "others") ? document.getElementById('otherUserAuthor').style.display = "block": document.getElementById(
+               'otherUserAuthor').style.display = "none";
+       }
+       
+       function showVisibilityPublishedDate(event){
+           const currentValue = event.target.value;
+        //    console.log(currentValue);
+        //    alert(currentValue);
+           var publishedStatus = currentValue;
+           if(publishedStatus == "enable") {
+            document.getElementById('visibility').style.display = "block";
+            document.getElementById('publishedDate').style.display = "block";
+           }else{
+            document.getElementById('visibility-input').value=""
+            document.getElementById('datepicker-component2').value = ""
+            document.getElementById('visibility').style.display = "none";
+            document.getElementById('publishedDate').style.display = "none";
+           }
+       }
+
+       $(document).on("change", ".file_multi_video", function(evt) {
+            var $source = $('#video_here');
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            $source.parent()[0].load();
+        });
+       
+    </script>    
+ @endsection

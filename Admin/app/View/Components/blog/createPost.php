@@ -13,11 +13,13 @@ class createPost extends Component
      */
     public $getAllCategories;
     public $getAllTags;
-    public function __construct($getAllCategories, $getAllTags)
+    public $getAllUsers;
+    public function __construct($getAllCategories, $getAllTags, $getAllUsers)
     {
         //
         $this->getAllCategories = $getAllCategories;
         $this->getAllTags = $getAllTags;
+        $this->getAllUsers = $getAllUsers;
     }
 
     /**

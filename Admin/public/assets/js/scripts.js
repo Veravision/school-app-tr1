@@ -6,14 +6,14 @@
         // Initializes search overlay plugin.
         // Replace onSearchSubmit() and onKeyEnter() with 
         // your logic to perform a search and display results
-        $(".list-view-wrapper").scrollbar();
+        // $(".list-view-wrapper").scrollbar();
 
-        $('[data-pages="search"]').search({
+        $('[data-page="search"]').search({
             // Bind elements that are included inside search overlay
-            searchField: '#overlay-search',
+            // searchField: '#overlay-search',
             closeButton: '.overlay-close',
-            suggestions: '.overlay-suggestions',
-            brand: '.brand',
+            // suggestions: '.overlay-suggestions',
+            // brand: '.brand',
              // Callback that will be run when you hit ENTER button on search box
             onSearchSubmit: function(searchString) {
                 console.log("Search for: " + searchString);
@@ -52,8 +52,8 @@
     });
 
     
-    $('.panel-collapse label').on('click', function(e){
-        e.stopPropagation();
-    })
+    // $('.panel-collapse label').on('click', function(e){
+    //     e.stopPropagation();
+    // })
     
 })(window.jQuery);

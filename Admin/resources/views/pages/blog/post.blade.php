@@ -1,24 +1,27 @@
 <x-app-layout>
+    @section('styles')
+        @yield('createpoststyles')
+        <link href="{{ asset('assets/plugins/filepond/css/filepond.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/filepond/css/filepond-image-preview.css') }}" rel="stylesheet" />
+    
+        <link href="{{ asset('assets/plugins/bootstrap-tag/bootstrap-tagsinput.css') }}" rel="stylesheet"
+            type="text/css" />
+        <link href="{{ asset('https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet"
+            type="text/css" media="screen">
+        <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet"
+            type="text/css" media="screen">
+        <link href="{{ asset('assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet"
+            type="text/css" media="screen">
+        <link href="{{ asset('assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}"
+            rel="stylesheet" type="text/css" />
+        <link
+            href="{{ asset('assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css') }}"
+            rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet"
+            type="text/css" media="screen" />
+    @endsection
     <x-slot:slot>
-        @section('styles')
-            <link href="{{ asset('assets/plugins/bootstrap-tag/bootstrap-tagsinput.css') }}" rel="stylesheet"
-                type="text/css" />
-            {{-- <link href="{{ asset('assets/plugins/dropzone/css/dropzone.css') }}" rel="stylesheet" type="text/css" /> --}}
-            <link href="{{ asset('https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css') }}" rel="stylesheet" />
-            <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet"
-                type="text/css" media="screen">
-            <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet"
-                type="text/css" media="screen">
-            <link href="{{ asset('assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet"
-                type="text/css" media="screen">
-            <link href="{{ asset('assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}"
-                rel="stylesheet" type="text/css" />
-            <link
-                href="{{ asset('assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css') }}"
-                rel="stylesheet" type="text/css" />
-            <link href="{{ asset('assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet"
-                type="text/css" media="screen" />
-        @endsection
         @include('shared.feedback')
 
         <!-- START SECONDARY SIDEBAR MENU-->
@@ -67,7 +70,7 @@
             <div class="d-flex align-items-center justify-content-between mb-2 sub-menu no-padding">
                 <div class="title-sm text-primary mb-0"><i class="pg-icon m-r-10">grid</i>Categories</div>
                 <a href="#" class="btn btn-xs btn-icon btn-rounded btn-light active">
-                    <span class="icon feather-icon" title="Add Category">
+                    <span class="icon feather-icon" title="Create Category">
                         <i class="pg-icon">plus</i>
                     </span>
                 </a>
@@ -79,7 +82,7 @@
             <div class="d-flex align-items-center justify-content-between mb-2 sub-menu no-padding">
                 <div class="title-sm text-primary mb-0"><i class="pg-icon m-r-10">tag</i>Tags</div>
                 <a href="#" class="btn btn-xs btn-icon btn-rounded btn-light active">
-                    <span class="icon feather-icon" title="Add Tag">
+                    <span class="icon feather-icon" title="Create Tag">
                         <i class="pg-icon">plus</i>
                     </span>
                 </a>
@@ -92,7 +95,7 @@
                 <x-blog.display-all-post :getAllPosts='$allPosts' />
             </div>
             <div id="content1" style="display:none" class="sm-m-t-5 m-t-5">
-                <x-blog.create-post :getAllCategories='$allCategories' :getAllTags='$allTags' />
+                <x-blog.create-post :getAllCategories='$allCategories' :getAllTags='$allTags' :getAllUsers='$allUsers' />
             </div>
             <div id="content2" style="display:none" class="padding-30 sm-padding-5 sm-m-t-15 m-t-50">
                 <h2>We Secured Your Line</h2>
@@ -118,6 +121,7 @@
     </x-slot>
 
     @section('scripts')
+        @yield('createpostscripts')
         <script>
             function displayContent(contentID) {
                 //alert("hello");
@@ -139,10 +143,11 @@
             }
         </script>
         <!-- BEGIN PAGE LEVEL JS -->
+        <script src="{{ asset('assets/plugins/filepond/filepond.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/filepond/filepond.jquery.js') }}"></script>
+        <script src="{{ asset('assets/plugins/filepond/filepond-image-preview.js') }}"></script>
+        <script src="{{ asset('assets/plugins/filepond/custom-filepond.js') }}"></script>
 
-        {{-- <script src="{{ asset('assets/plugins/jquery-menuclipper/jquery.menuclipper.js') }}"></script> --}}
-        {{-- <script src="{{ asset('pages/js/pages.min.js') }}"></script> --}}
-        {{-- <script src="{{ asset('pages/js/pages.email.js') }}" type="text/javascript"></script>  --}}
         <script src="{{ asset('assets/js/form_layouts.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js') }}"
             type="text/javascript"></script>
@@ -170,9 +175,6 @@
         <script src="{{ asset('assets/js/datatables.js') }}" type="text/javascript"></script>
         {{-- <script src="{{ asset('assets/plugins/quill/quill.min.js') }}" type="text/javascript"></script> --}}
         <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>        
-        {{-- <script src="{{ asset('assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script> --}}
-        {{-- <script src="{{ asset('assets/plugins/bootstrap-typehead/typeahead.jquery.min.js') }}"></script> --}}
-        {{-- <script src="{{ asset('assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script> --}}
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
         <script>
             const quill = new Quill('#editor', {

@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('meta_title');
-            $table->string('slug');
-            $table->text('content');
-            $table->string('status');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

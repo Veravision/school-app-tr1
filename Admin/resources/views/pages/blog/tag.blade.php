@@ -3,7 +3,6 @@
         @section('styles')
             
         @endsection
-        @include('shared.feedback')
         <!-- START CONTAINER FLUID -->
         <div class=" container-fluid   container-fixed-lg">
             <!-- START BREADCRUMB -->
@@ -44,8 +43,8 @@
                         </div>
                         <div class="card-body">
                             <h2 class="mw-80">Get started with tags.</h2>
-                            <p class="fs-16 mw-80 m-b-40">Find your people. Engage your customers. Build your blog. Do
-                                it all with tags.</p>
+                            <p class="fs-16 mw-80 m-b-40">Find your people. Engage your customers. Build your blog. Do it all with tags.</p>
+                            <p>@include('shared.feedback')</p>
                             <form method="post" action="{{ route('post.tag.store') }}" id="form-personal"
                                 role="form" autocomplete="off">
                                 @csrf
@@ -64,28 +63,6 @@
                                             <label>Meta Title</label>
                                             <input type="text" class="form-control" name="meta_title"
                                                 value="{{ old('meta_title') }}" placeholder="" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group form-group-default input-group required">
-                                            <div class="form-input-group">
-                                                <label>Slug</label>
-                                                <input type="text" class="form-control" name="slug"
-                                                    value="{{ old('slug') }}" placeholder="" required>
-                                            </div>
-                                            <div class="input-group-append ">
-                                                <span class="input-group-text"> </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Content</label>
-                                            <textarea name="content" class="form-control" rows="10" style="resize:none" placeholder="Add descritions" required>{{ old('content') }}</textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -14,11 +14,11 @@ elements.forEach(
             imagePreviewHeight: 170,
             imageResizeTargetWidth: 200,
             imageResizeTargetHeight: 200,
-            files: [
-                {
-                    options: {type : 'image/png'}
-                }
-            ]
+            // files: [
+            //     {
+            //         options: {type : 'image/png'}
+            //     }
+            // ]
         }
     );
    } 

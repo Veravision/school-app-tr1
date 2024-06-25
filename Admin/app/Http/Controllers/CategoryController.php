@@ -34,8 +34,6 @@ class CategoryController extends Controller
         $request->validate([
             'title'             => ['required', 'max:255'],
             'meta_title'        => ['required', 'max:255'],
-            'slug'              => ['required', 'max:255'],
-            'content'           => ['required', 'max:1000'],
             'status'            => ['nullable'],
         ]);
 
@@ -43,8 +41,6 @@ class CategoryController extends Controller
 
         $tag->title       = $request->title;
         $tag->meta_title  = $request->meta_title;
-        $tag->slug        = $request->slug;
-        $tag->content     = $request->content;
         $tag->status      =(isset($request->status))? $request->status:0;
 
         $tag->save();

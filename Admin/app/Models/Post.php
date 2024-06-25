@@ -18,6 +18,7 @@ class Post extends Model
         'published',
         'published_at',
         'content',
+        'type',
         'is_delete',
     ];
 }
