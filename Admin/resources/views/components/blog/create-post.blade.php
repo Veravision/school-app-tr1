@@ -213,7 +213,7 @@
                                                                   </li>
                                                                   <li class="nav-item">
                                                                     <a href="#" data-bs-toggle="tab" role="tab" data-bs-target="#tabsliderimage">
-                                                                        <i class="material-icons fs-14 tab-icon">tune</i>Post Slider Image</a>
+                                                                        <i class="material-icons fs-14 tab-icon">tune</i>Post Slider</a>
                                                                   </li>
                                                                   <li class="nav-item">
                                                                     <a class="disabled" href="#" data-bs-toggle="tab" role="tab" data-bs-target="#tabversionhistory">
@@ -306,8 +306,8 @@
                                                      id="tab4">
                                                     <div class="row row-same-height">
                                                         <div class="col-md-4 b-r b-dashed b-primary ">
-                                                            <div class="row text-center pt-4">
-                                                                <div class="col-6">
+                                                            <div class="row pt-4">
+                                                                <div class="col-md-12">
                                                                     <p>
                                                                         <span class="semi-bold">Author</span>&nbsp;
                                                                         <select name="author" class="cs-select cs-skin-slide" data-init-plugin="cs-select" id="author" onchange="showOtherUserAuthor()">
@@ -316,15 +316,10 @@
                                                                         </select>
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-6" id="otherUserAuthor" style="display: none">
+                                                                <div class="col-md-12" id="otherUserAuthor" style="display: none">
                                                                     <p>
                                                                         <span class="semi-bold">Users</span>&nbsp;
-                                                                        <select name="other-user_author" class="cs-select cs-skin-slide" data-init-plugin="cs-select">
-                                                                            @foreach ($getAllUsers as $key => $user)
-                                                                                <option value="{{ $user->id }}">{{ $user->name }}</option>  
-                                                                                {{-- {{ old('other_user_author') == '{{ $user->id }}' ? 'selected' : '' }} --}}
-                                                                            @endforeach
-                                                                        </select>
+                                                                        <input name='users-list-tags' class='users-list' value='abatisse2@nih.gov, Justinian Hattersley'>
                                                                     </p>
                                                                 </div>
                                                             </div>
