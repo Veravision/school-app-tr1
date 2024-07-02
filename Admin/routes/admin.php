@@ -62,5 +62,6 @@ Route::middleware([
     });
     Route::controller(PostController::class)->group(function(){
         Route::get('blog-post', 'create')->name('post');
+        Route::post('create-post', 'store')->name('post.store');
     });
 });

@@ -36,7 +36,56 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         //
+        // $request->validate([
+        //     'title'             => ['required', 'max:255'],
+        //     'editor'             => ['required', 'max:5000'],
+        //     'meta_title'        => ['required', 'max:255'],
+        //     'status'            => ['nullable'],
+        // ]);
+        
+/** New Post Tab.*/
+    Post::create([
+        'title'           =>$request->title,
+        'author_id'       =>$request->author,//from user table
+        'meta_title'      =>$request->meta_title,
+        'slug'            =>$request->slug,
+        'summary'         =>$request->summary,
+        'published'       =>$request->published,
+        'published_at'    =>$request->published_,
+        'type'            =>$request->type,
+        'visibility'      =>$request->visibility,
+    ]);
+/** New Post Post Category.*/
+    // Get the selected values from Category checkboxes array
+    $selectedCategoryValues = $request->input('category', []);
+    PostCategory::create([
+        
+        
+
+    ]);
+/** New Post Post Tag.*/
+    // Get the selected values from Tag checkboxes array
+     $selectedTagValues = $request->input('tag', []);
+    PostTag::create([
+       
+    ]);
+/** New Post Post Meta.*/
+    PostMeta::create([
+       
+    ]);
+        
+        
+      
+
+
+        $post->meta_title  = $request->meta_title;
+
+        $post->save();
+       // dd($tag->id);
+       // var_dump($tag);
+        return back()->withInput()->with(['success' => 'post saved sucessfully.']);
     }
 
     /**
