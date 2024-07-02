@@ -460,9 +460,8 @@
         <script src="{{ asset('assets/plugins/filepond/filepond-image-preview.js') }}"></script>
         <script src="{{ asset('assets/plugins/filepond/custom-filepond.js') }}"></script>
 
-        <script src="{{ asset('assets/js/form_layouts.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js') }}"
-            type="text/javascript"></script>
+        {{-- <script src="{{ asset('assets/js/form_layouts.js') }}" type="text/javascript"></script> --}}
+        <script src="{{ asset('assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
         <script src="{{ asset('assets/js/form_wizard.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/js/card.js') }}" type="text/javascript"></script>
@@ -485,9 +484,9 @@
         </script>
         <script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatables.js') }}" type="text/javascript"></script>
-        {{-- <script src="{{ asset('assets/plugins/quill/quill.min.js') }}" type="text/javascript"></script> --}}
+        <script src="{{ asset('assets/plugins/quill/quill.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script> --}}
         <script>
             const quill = new Quill('#editor', {
                 modules: {

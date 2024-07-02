@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        dd(auth()->user()->admin_id, $request);
         //
         // $request->validate([
         //     'title'             => ['required', 'max:255'],
