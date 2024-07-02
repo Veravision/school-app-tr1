@@ -7,14 +7,14 @@
             </div>
             <div class="pull-right">
                 <div class="col-xs-12">
-                    <input type="text" name=""  value="" class="form-control" style="text-align:center" placeholder="Search here">
+                    <input type="text" name="" value="" class="form-control" style="text-align:center"
+                        placeholder="Search here">
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="card-body">
-            <table class="table table-hover demo-table-dynamic table-responsive-block"
-                id="tableWithDynamicRows">
+            <table class="table table-hover demo-table-dynamic table-responsive-block" id="tableWithDynamicRows">
                 <thead>
                     <tr>
                         <th style="width:5%">S/N</th>
@@ -34,7 +34,8 @@
                             <td>{{ $post->author }}</td>
                             <td>Str::of({{ $posts->summary }})->limit(50)</td>
                             <td>{{ $post->published == 1 ? 'Published' : 'Draft' }}</td>
-                            <td>{{ $post->published == 1 ? $post->published_at : $post->updated_at+'<br>'+'Last Edited' }}</td>
+                            <td>{{ $post->published == 1 ? $post->published_at : $post->updated_at + '<br>' + 'Last Edited' }}
+                            </td>
                             <td>...</td>
                         </tr>
                     @endforeach
